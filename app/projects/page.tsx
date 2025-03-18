@@ -12,7 +12,7 @@ export default function ProjectsPage() {
           {/* Header */}
           <div className="mb-16">
             <h1 className="text-4xl md:text-5xl font-normal tracking-tight text-zinc-100 mb-4" >
-              A Finance Major&apos;s Attempt at Coding
+              Stuff I&apos;ve Built
             </h1>
             <p className="text-lg md:text-xl text-zinc-400 max-w-2xl leading-relaxed font-light" style={{ textTransform: "lowercase" }}>
               a collection of applications i&apos;ve built, from ai chatbots to data collection tools.
