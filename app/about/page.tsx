@@ -10,7 +10,7 @@ export default function AboutPage() {
         <div className="max-w-3xl">
           {/* Header */}
           <div className="mb-16">
-            <h1 className="text-4xl md:text-5xl font-normal tracking-tight text-zinc-100 mb-4">deep dive about me</h1>
+            <h1 className="text-4xl md:text-5xl font-normal tracking-tight text-zinc-100 mb-4">Deep Dive About Me</h1>
             <p className="text-lg md:text-xl text-zinc-400 max-w-2xl leading-relaxed font-light">
               here&apos;s a detailed description of my life. long story short - i&apos;ve been down a lot of different rabbit
               holes.

@@ -11,7 +11,7 @@ export default function HomePage() {
         <div className="max-w-3xl">
           {/* Profile Section */}
           <div className="mb-16">
-            <h1 className="text-5xl sm:text-6xl font-normal tracking-tight text-zinc-100 mb-4">hey i&apos;m austin</h1>
+            <h1 className="text-5xl sm:text-6xl font-normal tracking-tight text-zinc-100 mb-4">Hey I&apos;m Austin</h1>
             <p className="text-xl md:text-2xl text-zinc-400 max-w-2xl leading-relaxed font-light">
               currently i&apos;m{" "}
               <span className="text-zinc-200">
