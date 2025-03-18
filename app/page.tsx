@@ -13,10 +13,7 @@ export default function HomePage() {
           <div className="mb-16">
             <h1 className="text-5xl sm:text-6xl font-normal tracking-tight text-zinc-100 mb-4">Hey I&apos;m Austin</h1>
             <p className="text-xl md:text-2xl text-zinc-400 max-w-2xl leading-relaxed font-light">
-              currently i&apos;m{" "}
-              <span className="text-zinc-200">
-                building a startup in sf with friends
-              </span>
+              currently i&apos;m <span className="text-zinc-200">building a startup with friends in sf</span>
             </p>
           </div>
 
@@ -25,19 +22,44 @@ export default function HomePage() {
             <h2 className="text-2xl font-normal tracking-tight text-zinc-100 mb-6">what i&apos;m up to these days</h2>
             <div className="space-y-3 text-zinc-300 font-light">
               <p>
-                founding team at <span>origami agents</span>
+                founding team at Origami Agents
+                <Link href="https://origamiagents.com" target="_blank" rel="noopener noreferrer">
+                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
+                </Link>
               </p>
               <p>
-                telling stories on x, linkedin, and instagram at <span>griot</span>
+                telling stories on x, linkedin, and instagram at{" "}
+                <span>Griot</span>
+                <Link href="https://griotstories.com" target="_blank" rel="noopener noreferrer">
+                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
+                </Link>
               </p>
               <p>
-                promoting college entrepreneurship at <span>power hour</span>
+                promoting college entrepreneurship at{" "}
+                <span>Power Hour</span>
+                <Link href="https://powerhour.vip" target="_blank" rel="noopener noreferrer">
+                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
+                </Link>
               </p>
               <p>
-                scouting at <span>soma capital</span>
+                scouting at{" "}
+                <span>Soma Capital</span>
+                <Link href="https://somacapital.com" target="_blank" rel="noopener noreferrer">
+                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
+                </Link>
               </p>
               <p>
-                promoting young fitness <span>illini run club</span>
+                promoting young fitness{" "}
+                <span>Illini Run Club</span>
+                <Link href="https://www.instagram.com/illinirunclub/" target="_blank" rel="noopener noreferrer">
+                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
+                </Link>
+              </p>
+              <p>
+                documenting it all on my personal Instagram
+                <Link href="https://www.instagram.com/austnkennedy/" target="_blank" rel="noopener noreferrer">
+                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
+                </Link>
               </p>
             </div>
           </div>
@@ -45,35 +67,62 @@ export default function HomePage() {
           {/* Past Section */}
           <div className="mb-16">
             <h2 className="text-2xl font-normal tracking-tight text-zinc-100 mb-6">past-seasons</h2>
-            <ul className="space-y-3 text-zinc-400 font-light">
-              <li>
-                interviewed young entrepreneurs at <span>proof of concept</span>
+            <div className="space-y-3 text-zinc-300 font-light">
+              <li className="flex items-center">
+                interviewed young entrepreneurs at Proof of Concept
+                <Link href="https://www.instagram.com/proofofconceptofficial/" target="_blank" rel="noopener noreferrer">
+                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
+                </Link>
               </li>
-              <li>
-                member of <span>phi chi theta</span> business fraternity
+              <li className="flex items-center">
+                member of Phi Chi Theta business fraternity
+                <Link href="https://www.pct-illinois.com/" target="_blank" rel="noopener noreferrer">
+                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
+                </Link>
               </li>
-              <li>
-                finance + computer science + commercial real estate degree at university of illinois urbana-champaign
+              <li className="flex items-center">
+                finance + computer science + commercial real estate degree at University of Illinois Urbana-Champaign
+                <Link href="https://illinois.edu/" target="_blank" rel="noopener noreferrer">
+                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
+                </Link>
               </li>
-              <li>
-                caddied and had conversations with retired ceos at the <span>old elm club</span> in lake forest
+              <li className="flex items-center">
+                caddied and had conversations with retired ceos at The Old Elm Club in Lake Forest
+                <Link href="https://www.top100golfcourses.com/golf-course/old-elm" target="_blank" rel="noopener noreferrer">
+                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
+                </Link>
               </li>
-              <li>
-                recruited speakers for <span>illinois sports business conference</span>
+              <li className="flex items-center">
+                recruited speakers for Illinois Sports Business Conference
+                <Link href="https://www.illinoissportsbusiness.net/" target="_blank" rel="noopener noreferrer">
+                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
+                </Link>
               </li>
-              <li>
-                knocked 1000s of doors as a sales rep at <span>blue raven solar</span>
+              <li className="flex items-center">
+                knocked 1000s of doors as a sales rep at Blue Raven Solar
+                <Link href="https://blueravensolar.com/" target="_blank" rel="noopener noreferrer">
+                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
+                </Link>
               </li>
-              <li>
-                brought reach to the uiuc content-creation scene
+              <li className="flex items-center">
+                brought REACH to the uiuc content-creation scene
+                <Link href="https://www.uiucreach.com/" target="_blank" rel="noopener noreferrer">
+                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
+                </Link>
               </li>
-              <li>
-                learned a lot of what-not-to-do as co-founder of <span>defined trajectory personal training</span>
+              <li className="flex items-center">
+                learned a lot of what-not-to-do as co-founder of Defined Trajectory Personal Training
+                <Link href="https://www.instagram.com/defined_trajectory/" target="_blank" rel="noopener noreferrer">
+                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
+                </Link>
               </li>
-              <li>
-                stocked shelves in a freezer for three years at <span>marianos</span>
+              <li className="flex items-center">
+                stocked shelves in a freezer for three years at Mariano&apos;s
+                <Link href="https://www.marianos.com/" target="_blank" rel="noopener noreferrer">
+                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
+                </Link>
               </li>
-            </ul>
+            </div>
           </div>
 
           {/* Quick Links */}
@@ -106,3 +155,4 @@ export default function HomePage() {
     </PageLayout>
   )
 }
+
