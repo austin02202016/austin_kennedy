@@ -1,158 +1,152 @@
-"use client"
-
+import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
-import { PageLayout } from "@/components/page-layout"
+import type { Metadata } from "next"
+import { FAQSchema } from "@/components/blog/Schema"
+import { SITE_URL } from "@/lib/constants"
+
+export const metadata: Metadata = {
+  title: "Austin Kennedy — Founding Engineer at Origami (YC F24)",
+  description:
+    "Personal website of Austin Kennedy. Founding Engineer at Origami (YC F24). Self-taught engineer, UIUC grad, community builder in San Francisco.",
+  alternates: {
+    canonical: SITE_URL,
+  },
+}
+
+const faqData = [
+  {
+    question: "Who is Austin Kennedy?",
+    answer:
+      "Austin Kennedy is a Founding Engineer at Origami (YC F24), a YC-backed AI startup in San Francisco. He is a self-taught software engineer who graduated from the University of Illinois Urbana-Champaign (UIUC) with a Finance degree from Gies College of Business.",
+  },
+  {
+    question: "What is Origami?",
+    answer:
+      "Origami is a Y Combinator (Fall 2024) backed startup building AI-powered prospecting and go-to-market automation tools. Austin Kennedy serves as a Founding Engineer, building AI agents and MCP (Model Context Protocol) servers.",
+  },
+  {
+    question: "What does Austin Kennedy build?",
+    answer:
+      "Austin builds AI agents, MCP servers, and automation tools at Origami. Notable projects include The Nest (an open-source MCP server), the Origami Agent Orchestration Layer, and internal AI tools that cut operations time from 20 hours/week to 20 minutes/day.",
+  },
+]
 
 export default function HomePage() {
   return (
-    <PageLayout>
-      <div className="min-h-screen flex flex-col py-20 px-8 md:px-16 lg:px-24">
-        <div className="max-w-3xl">
-          {/* Profile Section */}
-          <div className="mb-16">
-            <h1 className="text-5xl sm:text-6xl font-normal tracking-tight text-zinc-100 mb-4">Hey I&apos;m Austin</h1>
-            <p className="text-xl md:text-2xl text-zinc-400 max-w-2xl leading-relaxed font-light">
-              currently i&apos;m <span className="text-zinc-200">building a startup with friends in sf</span>
+    <>
+      <FAQSchema questions={faqData} />
+      <div className="min-h-screen bg-white flex items-center justify-center px-6">
+        <div className="w-full max-w-[640px] text-center">
+          {/* Profile Header */}
+          <div className="flex flex-col items-center">
+            <Image
+              src="/austin-profile.jpg"
+              alt="Austin Kennedy"
+              width={72}
+              height={72}
+              className="rounded-full object-cover w-[72px] h-[72px]"
+            />
+            <h1 className="text-xl font-bold text-zinc-900 font-mono tracking-tight mt-4">
+              Austin Kennedy
+            </h1>
+            <p className="text-sm text-zinc-500 font-mono mt-1.5 leading-snug">
+              founding engineer,{" "}
+              <a
+                href="https://origami.chat"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:underline"
+              >
+                origami (yc f24)
+              </a>
+            </p>
+            <p className="text-sm text-zinc-500 font-mono italic mt-0.5 leading-snug">
+              self-taught eng. uiuc grad. building in sf.
             </p>
           </div>
 
-          {/* Current Section */}
-          <div className="mb-16">
-            <h2 className="text-2xl font-normal tracking-tight text-zinc-100 mb-6">what i&apos;m up to these days</h2>
-            <div className="space-y-3 text-zinc-300 font-light">
-              <p>
-                founding team at Origami Agents
-                <Link href="https://origamiagents.com" target="_blank" rel="noopener noreferrer">
-                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
-                </Link>
-              </p>
-              <p>
-                telling stories on x, linkedin, and instagram at{" "}
-                <span>Griot</span>
-                <Link href="https://griotstories.com" target="_blank" rel="noopener noreferrer">
-                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
-                </Link>
-              </p>
-              <p>
-                promoting college entrepreneurship at{" "}
-                <span>Power Hour</span>
-                <Link href="https://powerhour.vip" target="_blank" rel="noopener noreferrer">
-                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
-                </Link>
-              </p>
-              <p>
-                scouting at{" "}
-                <span>Soma Capital</span>
-                <Link href="https://somacapital.com" target="_blank" rel="noopener noreferrer">
-                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
-                </Link>
-              </p>
-              <p>
-                promoting young fitness{" "}
-                <span>Illini Run Club</span>
-                <Link href="https://www.instagram.com/illinirunclub/" target="_blank" rel="noopener noreferrer">
-                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
-                </Link>
-              </p>
-              <p>
-                documenting it all on my personal Instagram
-                <Link href="https://www.instagram.com/austnkennedy/" target="_blank" rel="noopener noreferrer">
-                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
-                </Link>
-              </p>
-            </div>
-          </div>
+          {/* Divider */}
+          <div className="border-t border-zinc-100 my-10" />
 
-          {/* Past Section */}
-          <div className="mb-16">
-            <h2 className="text-2xl font-normal tracking-tight text-zinc-100 mb-6">past-seasons</h2>
-            <div className="space-y-3 text-zinc-300 font-light">
-              <li className="flex items-center">
-                interviewed young entrepreneurs at Proof of Concept
-                <Link href="https://www.instagram.com/proofofconceptofficial/" target="_blank" rel="noopener noreferrer">
-                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
-                </Link>
-              </li>
-              <li className="flex items-center">
-                member of Phi Chi Theta business fraternity
-                <Link href="https://www.pct-illinois.com/" target="_blank" rel="noopener noreferrer">
-                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
-                </Link>
-              </li>
-              <li className="flex items-center">
-                finance + computer science + commercial real estate degree at University of Illinois Urbana-Champaign
-                <Link href="https://illinois.edu/" target="_blank" rel="noopener noreferrer">
-                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
-                </Link>
-              </li>
-              <li className="flex items-center">
-                caddied and had conversations with retired ceos at The Old Elm Club in Lake Forest
-                <Link href="https://www.top100golfcourses.com/golf-course/old-elm" target="_blank" rel="noopener noreferrer">
-                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
-                </Link>
-              </li>
-              <li className="flex items-center">
-                recruited speakers for Illinois Sports Business Conference
-                <Link href="https://www.illinoissportsbusiness.net/" target="_blank" rel="noopener noreferrer">
-                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
-                </Link>
-              </li>
-              <li className="flex items-center">
-                knocked 1000s of doors as a sales rep at Blue Raven Solar
-                <Link href="https://blueravensolar.com/" target="_blank" rel="noopener noreferrer">
-                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
-                </Link>
-              </li>
-              <li className="flex items-center">
-                brought REACH to the uiuc content-creation scene
-                <Link href="https://www.uiucreach.com/" target="_blank" rel="noopener noreferrer">
-                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
-                </Link>
-              </li>
-              <li className="flex items-center">
-                learned a lot of what-not-to-do as co-founder of Defined Trajectory Personal Training
-                <Link href="https://www.instagram.com/defined_trajectory/" target="_blank" rel="noopener noreferrer">
-                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
-                </Link>
-              </li>
-              <li className="flex items-center">
-                stocked shelves in a freezer for three years at Mariano&apos;s
-                <Link href="https://www.marianos.com/" target="_blank" rel="noopener noreferrer">
-                  <ArrowRight className="inline-block ml-1 h-4 w-4 text-zinc-300 hover:text-zinc-100 transition-colors" />
-                </Link>
-              </li>
+          {/* Two Column Layout */}
+          <div className="inline-flex flex-col sm:flex-row gap-10 sm:gap-20 font-mono text-left">
+            {/* Left Column — Pages */}
+            <div className="space-y-4">
+              <Link
+                href="/blog"
+                className="block text-base text-zinc-900 hover:text-zinc-500 transition-colors"
+              >
+                {">"} my thoughts (blog)
+              </Link>
+              <Link
+                href="/about"
+                className="block text-base text-zinc-900 hover:text-zinc-500 transition-colors"
+              >
+                {">"} my story
+              </Link>
+              <Link
+                href="/projects"
+                className="block text-base text-zinc-900 hover:text-zinc-500 transition-colors"
+              >
+                {">"} projects
+              </Link>
+              <Link
+                href="/resources"
+                className="block text-base text-zinc-900 hover:text-zinc-500 transition-colors"
+              >
+                {">"} recommended resources
+              </Link>
+              <Link
+                href="/podcasts"
+                className="block text-base text-zinc-900 hover:text-zinc-500 transition-colors"
+              >
+                {">"} past podcasts
+              </Link>
             </div>
-          </div>
 
-          {/* Quick Links */}
-          <div className="border-t border-zinc-800/50 pt-8">
-            <div className="flex flex-wrap gap-x-6 gap-y-3 text-zinc-400 font-light">
-              <Link href="/projects" className="flex items-center hover:text-zinc-100 transition-colors">
-                coding projects
-                <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
-              <Link href="/podcasts" className="flex items-center hover:text-zinc-100 transition-colors">
-                podcasts
-                <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
-              <Link href="/short-form" className="flex items-center hover:text-zinc-100 transition-colors">
-                short-form
-                <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
-              <Link href="/about" className="flex items-center hover:text-zinc-100 transition-colors">
-                my life
-                <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
-              <Link href="/resources" className="flex items-center hover:text-zinc-100 transition-colors">
-                resources
-                <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
+            {/* Right Column — Socials + Get in Touch */}
+            <div className="space-y-4">
+              <a
+                href="https://x.com/astnkennedy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-base text-zinc-900 hover:text-zinc-500 transition-colors"
+              >
+                {">"} x.com
+              </a>
+              <a
+                href="https://www.linkedin.com/in/austnkennedy/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-base text-zinc-900 hover:text-zinc-500 transition-colors"
+              >
+                {">"} linkedin
+              </a>
+              <a
+                href="https://www.instagram.com/austnkennedy/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-base text-zinc-900 hover:text-zinc-500 transition-colors"
+              >
+                {">"} instagram
+              </a>
+              <div className="border-t border-zinc-100 my-2" />
+
+              <div className="flex items-center gap-2">
+                <Link
+                  href="/chat"
+                  className="text-base text-zinc-900 hover:text-zinc-500 transition-colors"
+                >
+                  {">"} get in touch
+                </Link>
+                <span className="bg-blue-500 text-white text-[11px] font-semibold rounded-full min-w-[24px] h-5 flex items-center justify-center leading-none px-1">
+                  +2
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </PageLayout>
+    </>
   )
 }
-
