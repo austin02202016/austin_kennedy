@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
+import Image from "next/image"
 import {
   getBlogPost,
   getAllBlogPosts,
@@ -162,6 +163,20 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   {tag}
                 </span>
               ))}
+            </div>
+          )}
+
+          {/* Cover Image */}
+          {post.image && (
+            <div className="mb-10 -mx-6 md:-mx-12">
+              <Image
+                src={post.image}
+                alt={post.title}
+                width={1200}
+                height={630}
+                className="w-full h-auto rounded-md"
+                priority
+              />
             </div>
           )}
 
