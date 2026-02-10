@@ -27,7 +27,7 @@ const faqData = [
   {
     question: "What does Austin Kennedy build?",
     answer:
-      "Austin builds AI agents, MCP servers, and automation tools at Origami. Notable projects include The Nest (an open-source MCP server), the Origami Agent Orchestration Layer, and internal AI tools that cut operations time from 20 hours/week to 20 minutes/day.",
+      "Austin builds AI agents, MCP servers, and automation tools at Origami. Notable projects include The Nest (an open-source MCP server) and internal AI tools that cut operations time from 20 hours/week to 20 minutes/day.",
   },
 ]
 
@@ -102,6 +102,14 @@ export default function HomePage() {
               >
                 {">"} past podcasts
               </Link>
+              <a
+                href="https://sleep-on-my-couch-2ejt.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-base text-zinc-900 hover:text-zinc-500 transition-colors"
+              >
+                {">"} sleep on my couch
+              </a>
             </div>
 
             {/* Right Column — Socials + Get in Touch */}

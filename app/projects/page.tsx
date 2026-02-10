@@ -42,33 +42,10 @@ export default function ProjectsPage() {
             visitLink="https://github.com/austin02202016/the_nest_final"
           />
           <ProjectItem
-            title="Origami AOL (Agent Orchestration Layer)"
-            description="core product — workflow builder for go-to-market workflows with 21+ nodes in the library. the main thing we're shipping."
-            technologies={["node.js", "react", "mcp", "typescript"]}
-            visitLink="https://github.com/Origami-Agents/agent-orchestration-layer"
-          />
-          <ProjectItem
             title="TIS (The Intelligent Search)"
             description="research agent with mcp connectivity — a claygent replica with better functionality and screenshot tools. deployed on render with 3 sync api routes across 3 repositories."
             technologies={["node.js", "mcp", "render", "api"]}
             visitLink="https://github.com/Origami-Agents/origami-claygent"
-          />
-          <ProjectItem
-            title="Money-Collector"
-            description="system to track and collect revenue from clients. grew origami revenue from $5k/month to $65k, $57k, $47k, $62k/month. all run by me."
-            technologies={["node.js", "stripe", "automation"]}
-          />
-          <ProjectItem
-            title="ORYO-MCP"
-            description="mcp server for workflow generation. used by instafleet, luthor, and other clients."
-            technologies={["mcp", "node.js", "workflow"]}
-            completed
-          />
-          <ProjectItem
-            title="Cold Outbound Consultant"
-            description="managed 25 client accounts for outbound campaigns. averaged 15-20% response rates."
-            technologies={["automation", "crm", "outbound"]}
-            completed
           />
         </div>
       </section>
@@ -83,9 +60,9 @@ export default function ProjectsPage() {
             technologies={["next.js", "automation", "content"]}
           />
           <ProjectItem
-            title="Griot Customer Portal"
-            description="analytics dashboard for content creators to track twitter performance and generate content ideas."
-            technologies={["next.js", "tailwindcss", "twitter api", "analytics"]}
+            title="Griot"
+            description="personal content operating system. ai chat interface for writing, linkedin post management with apify scraping, instagram reels dashboard, video editor, and week-over-week analytics — all in one app."
+            technologies={["next.js", "clerk", "supabase", "claude api", "openai", "apify", "recharts"]}
           />
           <ProjectItem
             title="Oskee"
@@ -106,6 +83,18 @@ export default function ProjectsPage() {
             title="The Capital Club"
             description="beehiv workaround to collect multiple data points for new subscribers."
             technologies={["next.js", "react.js", "beehiv api", "vercel"]}
+          />
+          <ProjectItem
+            title="For Ashlee"
+            description="a love letter website for my girlfriend. interactive envelope that opens to reveal a personal note."
+            technologies={["next.js", "vercel"]}
+            visitLink="https://forashlee.love"
+          />
+          <ProjectItem
+            title="Sleep On My Couch"
+            description="airbnb-style booking page for friends visiting sf. lists sleeping spots (guest bedroom, air mattress, couch), amenities, house rules, and building perks like a climbing wall and rooftop terrace."
+            technologies={["next.js", "tailwind", "vercel"]}
+            visitLink="https://sleep-on-my-couch-2ejt.vercel.app/"
           />
         </div>
       </section>
