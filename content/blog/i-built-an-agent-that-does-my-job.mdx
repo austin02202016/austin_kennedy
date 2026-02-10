@@ -46,10 +46,23 @@ I've added voice features so I can get briefings on my bike ride to work. What u
 
 The best tools don't just save time — they change the shape of your day.
 
+## The Ripple Effect
+
+This agent wasn't an isolated project. It was part of a progression where each build stacked on the last:
+
+1. **TIS (The Intelligent Search)** — A research agent with MCP connectivity. Deployed on Render with 3 sync API routes across separate repos. This taught me how to structure multi-service projects.
+2. **Cold Outbound Consultant** — Managed 25 client accounts with agents handling their outbound. Clients averaged 15-20% response rates.
+3. **Money-Collector** — When I joined, we were collecting $5k/month. After building a system to track billing and automate collections, we hit $65k in a single month. That system still runs.
+4. **The Nest** — The culmination. An MCP server with an open-source front end that automated call prep, invoice sending, billing tracking, and account management. Essentially automated my entire ops role.
+
+Each project taught me something the previous one didn't. TIS taught me deployment. The outbound system taught me scale. Money-Collector taught me that automation compounds. The Nest taught me that the best engineering work eliminates your own job.
+
 ## What I Learned Building It
 
 1. **Start with your own pain.** I didn't build this because someone told me to. I built it because I was drowning in prep work.
 2. **Unify before you automate.** The agent is only as good as the data it can access. Getting everything into one place was 80% of the work.
 3. **Ship ugly, iterate fast.** The first version was a CLI tool that only I could use. That was fine. It proved the concept.
+4. **Push to Git more.** Small, frequent commits. I learned this the hard way — going too long between pushes cost me hours of lost work more than once.
+5. **Testing isn't optional.** As these agents handled real money and real client data, I realized that "it works on my machine" isn't good enough. Building testing habits early is the unlock I wish I'd prioritized sooner.
 
 If you're an engineer at a startup, look at where your team spends the most time on repetitive knowledge work. That's where your first agent should live.

@@ -1,0 +1,202 @@
+---
+title: "How to Become an Engineer in 2026 (No CS Degree Required)"
+description: "The exact steps I'd follow if I were starting from zero today. Build a website, learn a backend, ship agents. No theory, just what to do."
+publishedAt: 2026-02-09
+author: Austin Kennedy
+tags: ["Engineering", "Self-Taught", "Guide", "AI Agents", "Cursor", "Next.js"]
+featured: true
+seo:
+  metaTitle: "How to Become an Engineer in 2026 — Step by Step | Austin Kennedy"
+  metaDescription: "The exact steps to go from zero to engineer in 2026. Build a website with Next.js, learn backend, ship AI agents. No CS degree needed. A prescriptive guide."
+---
+
+# How to Become an Engineer in 2026
+
+This isn't my story. I've written that [here](/blog/self-taught-engineer).
+
+This is **what you should do** — step by step — if you want to become an engineer starting from zero. No CS degree. No bootcamp. Just the exact playbook I'd follow if I were starting over today.
+
+The whole thing is a 10-20 hour down payment. By the end of it, you'll realize that every problem you hit is solvable. That's the most important thing you'll learn.
+
+---
+
+## Step 1: Build a Personal Website
+
+This is day one. Not "learn JavaScript." Not "watch a tutorial." Build something real that lives on the internet.
+
+My friend Connor — a non-technical finance major — [built himself a personal website in 27 minutes](https://www.linkedin.com/posts/austnkennedy_my-friend-connor-just-built-himself-a-personal-activity-7420531855906455552-R3Ej) following these exact steps. If he can do it, you can do it.
+
+**Why a website first?** Because it teaches you the full loop: write code → see it in the browser → deploy it → share the URL. That loop is everything. Once you've done it once, you know the shape of every project that comes after.
+
+### What to do:
+
+1. **Download [Cursor](https://cursor.com) + create a Next.js project.** This is your AI-powered code editor. Open the terminal and run:
+   ```
+   npx create-next-app@latest my-website
+   ```
+   Say yes to TypeScript, yes to Tailwind, yes to App Router. These are the defaults for a reason. Use Claude 4.6 (Opus) as your model in Cursor. It's the best for this.
+
+2. **Create a draft of your site.** Open the Chat in Cursor. Paste in your LinkedIn experiences. Use [Wispr Flow](https://wisprflow.com) and just talk about yourself for a few minutes into the chat — then say "make me a personal website." You'll get something quick. That's your dopamine hit.
+
+3. **Make it look good.** It'll be ugly at first. That's fine. Screenshot websites and design styles you like — paste them directly into Cursor's chat and say *"Make my site look like this."* Iterate until it's something you're proud of.
+
+4. **Connect [Chrome DevTools MCP](https://github.com/nicholasgriffintn/chrome-devtools-mcp) if you want to get fancy.** This lets your AI agent see your live browser — inspect the DOM, take screenshots, compare your site to the design you're going for. It's not required, but it's a cheat code for design iteration.
+
+5. **Host it on the web.** Create a GitHub account. Tell Cursor "push this to a new repo." Create a [Vercel](https://vercel.com) account linked with your GitHub. Click deploy. That's it. You'll get a URL like `my-website.vercel.app`. Attach that link in your LinkedIn bio and send it to recruiters.
+
+**Don't know how to do any of these steps?** Screenshot the part where you're stuck, paste it into Cursor or Claude or ChatGPT, and ask. Every single one of these problems has been solved a thousand times. The AI will walk you through it.
+
+### What you'll learn without trying:
+
+- How a project is structured (files, folders, components)
+- How to write JSX/TSX (it's just HTML with superpowers)
+- How Tailwind CSS works (styling without writing CSS files)
+- How Git and GitHub work (you'll push code to deploy)
+- How deployment works (code → internet in one click)
+
+This step alone puts you ahead of 90% of people who "want to learn to code." You have a real thing. On the real internet. With a real URL.
+
+---
+
+## Step 2: Make It Dynamic (Learn the Backend)
+
+Your website is static right now. It shows the same thing to everyone. The next step is making it do things — pull data, respond to user input, talk to APIs.
+
+### What to do:
+
+1. **Add a database.** Go to [Supabase](https://supabase.com), create a free project. Supabase gives you a PostgreSQL database with an API out of the box. You don't need to understand databases deeply yet — just know that it's where your data lives.
+
+2. **Build something that reads and writes data.** Ideas:
+   - A guestbook where visitors can leave a message
+   - A blog where you write posts that are stored in the database
+   - A simple dashboard that shows data you care about
+
+3. **Build an API route.** In Next.js, you can create a file at `app/api/something/route.ts` and it becomes an API endpoint. This is your first backend code. It receives a request and sends back a response. That's all a backend is.
+
+4. **Deploy the backend.** If your API routes live inside your Next.js app, they deploy automatically on Vercel. If you need a separate backend (a Node.js or Python server), use [Render](https://render.com). I personally prefer Render for backends — super easy setup. Connect your GitHub repo, set your build and start commands, done.
+
+### The key insight:
+
+The gap between "frontend" and "full-stack" is smaller than it looks. It's the same languages, the same tools, the same deployment flow. You're just adding a database and some server-side logic.
+
+Again — if you get stuck, **screenshot the error and paste it into Cursor.** The AI has seen every error message you'll encounter. Let it help you.
+
+---
+
+## Step 3: Build an App
+
+Now you know how websites work. Time to build something that actually does something. Here are three app ideas in order of difficulty — start with the first one.
+
+### App 1: LinkedIn Post Writer (Easiest — start here)
+
+This is what I built first. It's literally one API call.
+
+- Build a simple page with a text input ("What do you want to write about?")
+- When they submit, make one API call to [Claude](https://docs.anthropic.com) or [OpenAI](https://platform.openai.com)
+- Display the generated LinkedIn post
+
+That's it. One input, one API call, one output. You'll learn how API keys work, how to call an external service, and how to display the result. The whole thing can be done in a single afternoon.
+
+For the frontend: [Next.js](https://nextjs.org) + [shadcn/ui](https://ui.shadcn.com) for beautiful components out of the box. Use Chrome DevTools MCP and paste screenshots of UIs you like into Cursor to get the design right.
+
+### App 2: Spotify Song Recommender (Two API calls)
+
+This is step two — now you're chaining APIs together.
+
+- Connect to the [Spotify API](https://developer.spotify.com/documentation/web-api) to fetch a user's top songs and artists
+- Send that list to Claude or ChatGPT: *"Based on these songs, recommend 10 new artists I'd like and why"*
+- Display the recommendations with a nice UI
+
+You'll learn: OAuth (Spotify requires login), chaining API calls, and handling more complex data. It's still very doable — just two API calls talking to each other.
+
+### App 3: LinkedIn Writer That Remembers Your Style (Add a database)
+
+Take App 1 and make it smarter. Instead of generic posts, it writes in *your* voice.
+
+- Sign up for [Supabase](https://supabase.com) — this is your database
+- Store the user's past LinkedIn posts in Supabase
+- When generating a new post, pull their past posts from the database and include them as context in the API call: *"Write a post about [topic] in this person's writing style. Here are their last 20 posts."*
+
+This is where it clicks. You now have a frontend (Next.js), a backend (API routes), a database (Supabase), and an AI model (Claude/OpenAI) all working together. That's a real full-stack app.
+
+This same pattern works for anything: store call transcripts in Supabase and build an agent that preps you for meetings. Store your journal entries and build a reflection tool. The pattern is always the same — store personal data in a database, give the AI access to it, get personalized outputs.
+
+### Bonus: Scrape Data and Do Something With It
+
+This one is underrated and incredibly fun. Set up an [Apify](https://apify.com) free trial, get an API token, and now you can scrape datasets from almost anywhere — Instagram, LinkedIn, Google Maps, X, websites. Then you build something that operates on that data.
+
+Ideas:
+
+- **Scrape Instagram reels from creators you admire** → feed the transcripts into Claude → generate posts in their style (this is basically how I built my AI copywriter side project)
+- **Scrape Google Maps listings** → plot houses/businesses on a map → build a dashboard for real estate research or local business analysis
+- **Scrape LinkedIn profiles in your industry** → analyze what titles, skills, and companies are trending → build a career research tool
+- **Slideshow generation** — I used [Plus AI](https://www.plusdocs.com) (they have an API) to automate PowerPoint creation for class presentations. Scrape data, structure it, feed it to the Plus AI API, and you get a formatted deck back. I had a lot of fun with this one.
+
+The pattern is always: (1) get data with Apify, (2) store or process it, (3) do something useful with an AI model. You'd be surprised how many datasets are out there that nobody is operating on.
+
+### Things I mess around with now that would be overcomplicated at first:
+
+These are things I actively build and enjoy — but if you're just starting out, they'll eat you alive. Save them for later.
+
+- **Video editors.** I fuck around with these now. File processing, codecs, timeline UIs — it's a whole world. But starting here would've killed my momentum.
+- **Social platforms.** Auth, feeds, notifications, moderation — you'll spend months before you have anything a user can actually touch.
+- **Real-time multiplayer anything.** WebSockets, conflict resolution, state sync. Fun problems once you know what you're doing. Nightmare problems when you don't.
+- **"Better versions" of existing tools.** Don't build a Notion clone or a Slack clone. You'll never finish. Build something small that solves *your* specific problem.
+
+The rule: if you can't describe the entire app in one sentence, it's too big. "It writes LinkedIn posts" — good. "It's a platform for creators to manage their content across all social media channels with analytics and scheduling" — too big. Scope down ruthlessly.
+
+### The tools for this phase:
+
+- **[shadcn/ui](https://ui.shadcn.com)** — Beautiful, copy-paste React components. Your UI will look professional immediately.
+- **[n8n](https://n8n.io)** — When {x} happens, do {y}. Low-code workflow builder. Great for connecting APIs and automating sequences.
+- **[MCP Protocol](https://modelcontextprotocol.io)** — The "USB-C port for AI." If you want your agents to connect to external tools (databases, APIs, browsers), learn this protocol. It's what we build on at [Origami](https://origami.chat).
+- **[Apify](https://apify.com)** — Scrape data from anywhere. Instagram, LinkedIn, X, websites. Feed it into your agents.
+
+---
+
+## Step 4: The Engineering Habits That Actually Matter
+
+Tools are the easy part. These habits are what separate "I built a thing" from "I'm an engineer":
+
+### Push to Git constantly.
+Small, frequent commits. Not once a day — every time something works. I learned this the hard way. Going too long between pushes cost me hours of lost work more than once.
+
+### Read the error message.
+Before you Google it. Before you ask ChatGPT. Read it. 80% of the time, the error message tells you exactly what's wrong. The other 20%, paste it into Cursor.
+
+### Ship ugly, then iterate.
+The first version of everything I built was embarrassing. A CLI tool only I could use. A UI that looked like it was from 2005. That's fine. **Working code that's ugly beats beautiful code that doesn't exist.**
+
+### Learn from people better than you.
+The single biggest accelerator in my journey was working alongside experienced engineers at Origami. I learned more in my first month there than in a year of solo study. If you can't get a job yet, contribute to open source. Join a Discord. Pair program with someone.
+
+---
+
+## Step 5: Where to Go From Here
+
+Once you've built a website, a backend, and something useful, you're an engineer. Seriously. The title isn't granted by a university — it's earned by shipping code that works.
+
+From here, the path branches:
+
+- **Go deeper on AI/agents** — Learn MCP, build multi-agent systems, work with embeddings and vector databases
+- **Go deeper on infrastructure** — Docker, Kubernetes, CI/CD. How to run things reliably at scale
+- **Go deeper on fundamentals** — Operating systems, networking, distributed systems. Every time I learn what's under the abstraction, my debugging ability jumps
+- **Go deeper on design** — Design systems, accessibility, UX engineering. Engineering + design makes you incredibly dangerous
+
+I wrote more about [what I'm still learning](/blog/self-taught-engineer#the-honest-part) and where my gaps are. Being honest about what you don't know is what lets you close the gap.
+
+---
+
+## The Meta-Lesson
+
+Every step above will involve moments where you're stuck and have no idea what to do. That feeling doesn't go away — you just get comfortable with it.
+
+The 10-20 hour down payment of setting up your first project, deploying it, and fixing the first 10 bugs will teach you the most important lesson in engineering:
+
+**All of these problems are solvable.**
+
+Not by you alone. By you plus Cursor, Claude, ChatGPT, Stack Overflow, and the thousands of people who hit the same error before you. The skill isn't knowing the answer — it's knowing how to find it fast.
+
+Start today. Build the website. Deploy it. Then build the next thing.
+
+If you have questions, DM me on [X](https://x.com/astnkennedy) or [LinkedIn](https://www.linkedin.com/in/austnkennedy/). I respond to everything.
