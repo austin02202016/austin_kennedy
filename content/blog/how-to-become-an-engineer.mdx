@@ -146,9 +146,21 @@ These are things I actively build and enjoy — but if you're just starting out,
 
 The rule: if you can't describe the entire app in one sentence, it's too big. "It writes LinkedIn posts" — good. "It's a platform for creators to manage their content across all social media channels with analytics and scheduling" — too big. Scope down ruthlessly.
 
+### Once your app works: add auth and payments
+
+You've got a working app. Now make it real.
+
+**Wrap it in [Clerk](https://clerk.com).** Clerk handles authentication — sign up, log in, user management — so you don't have to build any of it. Install the package, wrap your app in their provider, and you have auth in about 20 minutes. Every user gets an account. You can gate features behind login. Done.
+
+**Add [Stripe](https://stripe.com) for payments.** If your app is useful enough to charge for, Stripe makes it surprisingly simple. Create a Stripe account, use their API to create a checkout session, and redirect users to Stripe's hosted payment page. You don't need to build a payment form — Stripe handles all of that. The flow is: user clicks "upgrade" → your API route creates a Stripe checkout session → user pays on Stripe's page → Stripe sends a webhook back to your app confirming payment. That's it.
+
+These two things — auth and payments — turn a side project into a real product. And both are way easier than you'd think.
+
 ### The tools for this phase:
 
 - **[shadcn/ui](https://ui.shadcn.com)** — Beautiful, copy-paste React components. Your UI will look professional immediately.
+- **[Clerk](https://clerk.com)** — Authentication in 20 minutes. Sign up, log in, user management out of the box.
+- **[Stripe](https://stripe.com)** — Payments via API. Checkout sessions, subscriptions, invoices — all handled.
 - **[n8n](https://n8n.io)** — When {x} happens, do {y}. Low-code workflow builder. Great for connecting APIs and automating sequences.
 - **[MCP Protocol](https://modelcontextprotocol.io)** — The "USB-C port for AI." If you want your agents to connect to external tools (databases, APIs, browsers), learn this protocol. It's what we build on at [Origami](https://origami.chat).
 - **[Apify](https://apify.com)** — Scrape data from anywhere. Instagram, LinkedIn, X, websites. Feed it into your agents.

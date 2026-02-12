@@ -168,7 +168,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           {/* Cover Image */}
           {post.image && (
-            <div className="mb-10 -mx-6 md:-mx-12">
+            <div className="mb-10">
               <Image
                 src={post.image}
                 alt={post.title}
