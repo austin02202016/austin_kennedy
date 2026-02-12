@@ -102,14 +102,6 @@ export default function HomePage() {
               >
                 {">"} past podcasts
               </Link>
-              <a
-                href="https://sleep-on-my-couch-2ejt.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-base text-zinc-900 hover:text-zinc-500 transition-colors"
-              >
-                {">"} sleep on my couch
-              </a>
             </div>
 
             {/* Right Column — Socials + Get in Touch */}
@@ -139,6 +131,15 @@ export default function HomePage() {
                 {">"} instagram
               </a>
               <div className="border-t border-zinc-100 my-2" />
+
+              <a
+                href="https://sleep-on-my-couch-2ejt.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-base text-zinc-900 hover:text-zinc-500 transition-colors"
+              >
+                {">"} sleep on my couch
+              </a>
 
               <div className="flex items-center gap-2">
                 <Link
