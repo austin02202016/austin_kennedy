@@ -190,8 +190,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               prose-p:font-mono prose-p:leading-relaxed prose-p:text-zinc-700 prose-p:mb-6 prose-p:text-[15px]
               prose-a:text-zinc-900 prose-a:underline prose-a:underline-offset-2 prose-a:decoration-zinc-300 hover:prose-a:decoration-zinc-900
               prose-strong:text-zinc-900 prose-strong:font-semibold
-              prose-code:text-sm prose-code:bg-zinc-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+              prose-code:text-sm prose-code:bg-zinc-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-zinc-800
               prose-pre:bg-zinc-900 prose-pre:text-zinc-100 prose-pre:p-4 prose-pre:rounded-md
+              [&_pre_code]:bg-transparent [&_pre_code]:text-zinc-100 [&_pre_code]:p-0
               prose-blockquote:border-l-2 prose-blockquote:border-zinc-200 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-zinc-600
               prose-ul:space-y-2 prose-ol:space-y-2
               prose-li:text-zinc-700 prose-li:leading-relaxed prose-li:text-[15px] prose-li:font-mono

@@ -1,0 +1,189 @@
+---
+title: "How We Do AEO and SEO at Origami — Structured Data, Backlinks, and an Autonomous Blog Bot (Updated 2026)"
+description: "We went from 0 AI visibility to showing up in ChatGPT search results in 3 days. Here's exactly how — directory listings, structured data, an autonomous Claude Code bot, and a lot of schema fixes."
+publishedAt: 2026-03-03
+author: Austin Kennedy
+tags: ["AEO", "SEO", "AI Visibility", "Startup", "Structured Data", "Engineering"]
+featured: true
+seo:
+  metaTitle: "How We Do AEO and SEO at a YC Startup — Backlinks, Schema, AI Visibility | Austin Kennedy"
+  metaDescription: "Origami went from 0 AI visibility to appearing in ChatGPT results in 3 days. The exact AEO/SEO playbook — directory submissions, structured data, an autonomous blog bot running Claude Code on a cron."
+---
+
+# How We Do AEO and SEO at Origami
+
+**Quick Answer:** We treat growth like an engineering problem. We built an autonomous bot that monitors where Origami shows up in AI search results, identifies gaps, and writes blog posts to fill them — running on a VPS with Claude Code on a daily cron. Combined with 30+ directory submissions, 15 structured data fixes, and a full backlink outreach strategy, we went from a 6.9 AI visibility score to 16 in 3 days.
+
+Most startups treat SEO as an afterthought. We treated it as a sprint — and we're treating AEO (Answer Engine Optimization) as the next frontier.
+
+Here's what most people miss: it doesn't matter how good your product is if AI engines don't know you exist. When someone asks ChatGPT "what's the best prospecting tool for local businesses," and your company doesn't show up — that's a problem that's only getting bigger.
+
+---
+
+## The Starting Point
+
+Two weeks ago, our numbers looked like this:
+
+| Metric | Value |
+|--------|-------|
+| AI Visibility Score (Searchable) | 6.9 / 100 |
+| Brand Citations in ChatGPT | 1 |
+| Mention Rate | 17.2% |
+| Unbranded Query Appearances | 0 out of 40 |
+| Site Health | 78% |
+| Structured Data Errors | 94 |
+| Domain Authority | 2 |
+
+Basically: if you asked ChatGPT about us by name, it might mention us. If you asked about our category without using our name, we didn't exist.
+
+That's the gap between branded and unbranded AI visibility — and it's the whole game.
+
+---
+
+## The Three-Pronged Strategy
+
+### 1. Fix the Technical Foundation
+
+Before writing a single word of new content, we fixed the bones of the site. This is the unsexy stuff that everyone skips.
+
+In one day, we deployed 15 technical fixes:
+
+- **Fixed 94 structured data errors.** Broken breadcrumbs, malformed Organization schema, missing pricing offers, blog posts without proper BlogPosting schema.
+- **Added FAQPage schema to 60+ blog posts.** The blog template now auto-extracts FAQ sections from content and generates FAQPage JSON-LD. One code change, every blog post with an FAQ section gets rich snippets.
+- **Added Product schema to 5 product pages.** Name, description, brand, category, and pricing offers — the stuff AI engines parse when deciding what to cite.
+- **Fixed duplicate H1s.** The blog template was rendering an H1, and then the MDX content had a `# Title` creating another one. We downgraded content H1s to H2 in the markdown processor.
+- **Added security headers.** X-Frame-Options, HSTS, Content-Type-Options, Referrer-Policy, Permissions-Policy. Not directly SEO, but it signals trust.
+- **Created a /contact page with ContactPage schema.** AI engines use this to understand who you are and how to reach you.
+- **Added articleBody to BlogPosting schema.** Blog posts now include truncated body text in structured data, improving AI extraction.
+- **Fixed hardcoded canonical URLs.** Switched from hardcoded strings to a `SITE_URL` constant everywhere.
+- **Added Twitter cards to 13 pages** that were missing them.
+
+Site health went from 78% to projected 92-96% within a week. Structured data errors went from 94 to near zero.
+
+### 2. Directory Listings & Backlink Strategy
+
+Domain Authority doesn't move fast. But it does move — and directory submissions are the lowest-hanging fruit.
+
+We submitted to 12 directories in a single day:
+
+| Tier | Directories | DA Range |
+|------|------------|----------|
+| High-Authority | Capterra (DA 93), G2 (DA 92), Crunchbase (DA 91), AlternativeTo (DA 87), SourceForge (DA 86) | 85-93 |
+| SaaS-Specific | SaaSHub (75), Indie Hackers (64), F6S (63), StackShare (62), SaaSworthy (58) | 55-75 |
+| Foundational | LinkedIn Company Page (99), Google Business Profile (99) | 99 |
+
+Capterra syncs to GetApp and Software Advice, so one submission = three listings. G2 is the top B2B review site with dofollow backlinks. Crunchbase propagates to aggregators. AlternativeTo captures "alternative to Apollo/ZoomInfo/Clay" searches with dofollow links.
+
+We already had Product Hunt live. That brought the total to 13+ listings.
+
+Beyond directories, we built an outreach list of 30+ targets across three tiers — from TrustRadius and Clutch.co to BetaList and SideProjectors. Each one gets a personalized angle: some are "list us as an alternative to Clay," some are "here's our YC-backed vendor profile," some are backlink swaps.
+
+### 3. The Autonomous Blog Bot
+
+This is the part I'm most proud of from an engineering perspective.
+
+We built `austin_bot` — an autonomous content engine that runs [Claude Code](https://docs.anthropic.com) on a remote VPS. Two sides to it:
+
+- **Local (Cursor):** I edit skills, refine strategy, write new content, and review PRs.
+- **Remote (DigitalOcean Droplet):** Full repo clone, Claude Code CLI, MCP servers, a daily cron, and an API endpoint for on-demand triggers.
+
+I push strategy changes to the remote. The bot pushes PRs back to me. That's the whole loop.
+
+Every day at midnight PST, the bot:
+
+1. **Checks AI visibility** using the Searchable MCP server — monitors how ChatGPT, Perplexity, and Google AIO cite Origami across 20 tracked prompts
+2. **Identifies gaps** — which unbranded queries are we missing from? Which competitors are getting cited instead?
+3. **Writes AEO-optimized blog posts** targeting those gaps — following a strict writing skill that optimizes for AI citation (answer-first structure, self-contained passages under 80 words, FAQ sections, comparison tables)
+4. **Opens a PR** — we review and merge, Vercel auto-deploys
+
+It can also be triggered on demand via an API endpoint — I can send it a topic like "write a blog post about AI sales tools for insurance agencies" and it spins up immediately.
+
+The bot has strict scope rules — it can only modify the landing page and its own config. It can't touch the frontend app or backend. All changes go through PRs. Safety first.
+
+### The Prompt Clustering Strategy
+
+We didn't just write random blog posts. We mapped 50 AI prompts to 16 articles using prompt clustering:
+
+| Cluster | Article | Prompts Covered |
+|---------|---------|----------------|
+| Best Prospecting Tools for SMBs | Ranked list | 7 prompts |
+| Best Alternatives to Apollo | Alternatives guide | 6 prompts |
+| Best Alternatives to ZoomInfo | Alternatives guide | 4 prompts |
+| Best Tools for Home Services | Ranked list | 4 prompts |
+| Origami Review (update) | Review rewrite | 3 prompts |
+| Origami vs Clay (update) | Comparison update | 2 prompts |
+| 12 Vertical-Specific Guides | How-to guides | 12 prompts |
+
+Each article is designed to answer multiple prompts simultaneously. The "Best Prospecting Tools" piece alone targets 7 different queries — from "best prospecting tools that cover small businesses" to "what AI tool finds leads that traditional databases miss."
+
+Priority order is based on prompt coverage: write the articles that answer the most queries first.
+
+---
+
+## The Results (3 Days In)
+
+| Metric | Before | After (3 Days) | Change |
+|--------|--------|----------------|--------|
+| Google Clicks | ~3/day | ~50/day | **+1,267%** |
+| Google Impressions | ~200/day | 1,591 | **+669%** |
+| Avg CTR | 4.7% | 8.3% | **+78%** |
+| AI Visibility Score | 6.9 | 16 | **+132%** |
+| Brand Citations | 1 | 16 | **+1,500%** |
+| Branded Prompt Hit Rate | Unknown | 80% (8/10) | — |
+| Unbranded Prompt Hit Rate | 0% | 0% | Still the gap |
+
+The branded numbers exploded. ChatGPT now references Origami with links when people ask about us by name. Search traffic spiked from ~3 clicks/day to ~50/day, directly correlating with content going live.
+
+The unbranded gap is still the big challenge. Apollo dominates with 30+ mentions across prospecting/lead gen topics. That's what the 16 planned articles target — the alternatives guides and ranked lists are designed to break through on those queries.
+
+---
+
+## What I'd Tell Another Startup
+
+1. **Fix structured data first.** Don't write a single blog post until your schema is clean. AI engines parse structured data to decide what to cite. If your BlogPosting schema is broken, your content is invisible.
+
+2. **Directory submissions are free backlinks.** Most take 10 minutes. Capterra gives you 3 listings for 1 submission. There's no reason not to do this on day one.
+
+3. **Track AI visibility, not just Google rankings.** Tools like [Searchable](https://searchable.ai) let you monitor exactly how AI engines cite you. This is the new metric that matters.
+
+4. **Cluster your prompts before writing.** Don't write random content. Map the prompts you want to win → group them → write articles that answer multiple prompts at once. One article covering 7 prompts beats 7 articles covering 1 each.
+
+5. **Automate the boring parts.** The bot monitors, identifies gaps, and writes first drafts. We still review everything. But the gap between "we should write about this" and "here's a PR" went from days to hours.
+
+6. **AEO is not SEO.** SEO optimizes for Google's ranking algorithm. AEO optimizes for AI extraction — self-contained passages, direct answers, FAQ schema, comparison tables. The format matters as much as the content.
+
+---
+
+## FAQ
+
+### What is AEO (Answer Engine Optimization)?
+
+AEO is the practice of optimizing content so AI engines — ChatGPT, Perplexity, Google AIO, Claude, Copilot — cite your content in their answers. It focuses on self-contained passages, direct answers, structured data, and FAQ schema rather than traditional keyword density.
+
+### How fast does AEO work compared to SEO?
+
+We saw AI visibility more than double in 3 days and Google search clicks increase 1,267% in the same period. AEO content can get picked up faster than traditional SEO because AI engines re-index more frequently and prioritize answer-first content.
+
+### What tools do you use to track AI visibility?
+
+We use [Searchable](https://searchable.ai) to monitor how ChatGPT, Perplexity, and Google AIO cite Origami across 20 tracked prompts. It shows visibility scores, brand citations, mention rates, and which specific prompts return mentions.
+
+### Can you automate blog writing for AEO?
+
+Yes, but with guardrails. We run Claude Code on a VPS with a daily cron that identifies content gaps and writes AEO-optimized posts. All changes go through pull requests — a human reviews and merges everything. The bot accelerates the process; it doesn't replace editorial judgment.
+
+### How many directory submissions should a startup do?
+
+Start with 10-15. Focus on high-DA directories first (Capterra, G2, Crunchbase) because they're dofollow and propagate to aggregators. Then move to SaaS-specific directories (SaaSHub, StackShare, F6S). LinkedIn Company Page and Google Business Profile are foundational — do those regardless.
+
+---
+
+## What's Next
+
+We're in week two. The technical foundation is set, the directories are submitted, and the bot is shipping content daily. The next milestone is the March 22 pull — 30 days from baseline.
+
+The targets: visibility score of 20 (we're at 16), mention rate of 35% (we're at 18.4%), and 5+ unbranded queries returning Origami mentions (we're at 0).
+
+The gap is clear. The system is built. Now it's about volume and consistency — and watching the compounding kick in.
+
+If you're building a startup and want to talk about AEO strategy, DM me on [X](https://x.com/astnkennedy) or [LinkedIn](https://www.linkedin.com/in/austnkennedy/).
