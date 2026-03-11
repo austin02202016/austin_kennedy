@@ -71,7 +71,7 @@ export function SignupForm() {
       </h1>
 
       <p className="text-[15px] text-neutral-500 leading-relaxed mb-8 max-w-sm mx-auto md:mx-0">
-        Free food (Atomic Wings or pizza) for everyone who registers. Limited seats — we&apos;ll be verifying at the door.
+        Free food for everyone who registers. Limited seats — we&apos;ll be verifying at the door.
       </p>
 
       <form action={action} className="space-y-3.5 text-left">
