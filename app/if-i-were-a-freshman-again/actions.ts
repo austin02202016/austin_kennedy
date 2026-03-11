@@ -1,12 +1,13 @@
 "use server"
 
-import { supabaseAdmin } from "@/lib/supabase-freshman"
+import { getSupabaseAdmin } from "@/lib/supabase-freshman"
 
 const HARD_CAP = 230
 const DISPLAY_OFFSET = 50
 
 export async function getSignupCount() {
-  const { count } = await supabaseAdmin
+  const supabase = getSupabaseAdmin()
+  const { count } = await supabase
     .from("event_signups")
     .select("*", { count: "exact", head: true })
 
@@ -37,7 +38,8 @@ export async function submitSignup(formData: FormData) {
   const { actual } = await getSignupCount()
   const waitlisted = actual >= HARD_CAP
 
-  const { error: dbError } = await supabaseAdmin
+  const supabase = getSupabaseAdmin()
+  const { error: dbError } = await supabase
     .from("event_signups")
     .insert({ name: name.trim(), email: emailLower, phone: phoneClean, waitlisted })
 
