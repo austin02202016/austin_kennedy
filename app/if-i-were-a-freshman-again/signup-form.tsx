@@ -1,7 +1,6 @@
 "use client"
 
 import { useActionState, useEffect, useState } from "react"
-import Image from "next/image"
 import { submitSignup, getSignupCount } from "./actions"
 
 const ATTENDEE_PICS = [
@@ -78,17 +77,15 @@ export function SignupForm() {
         {count !== null && (
           <div className="flex items-center gap-3 mb-1 justify-center md:justify-start">
             <div className="flex -space-x-2.5">
-              {ATTENDEE_PICS.map((src, i) => (
-                <Image
-                  key={src}
-                  src={src}
-                  alt=""
-                  width={32}
-                  height={32}
-                  className="w-8 h-8 rounded-full object-cover border-2 border-neutral-50"
-                  style={{ zIndex: ATTENDEE_PICS.length - i }}
-                />
-              ))}
+            {ATTENDEE_PICS.map((src, i) => (
+              <img
+                key={src}
+                src={src}
+                alt=""
+                className="w-8 h-8 rounded-full object-cover border-2 border-neutral-50"
+                style={{ zIndex: ATTENDEE_PICS.length - i }}
+              />
+            ))}
             </div>
             <p className="text-[13px] text-neutral-500">
               <span className="font-semibold text-neutral-900">{count}</span> already registered
