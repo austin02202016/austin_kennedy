@@ -34,7 +34,7 @@ export function SignupForm() {
   }, [state?.success])
 
   if (state?.success) {
-    const shareUrl = "https://austinkennedy.com/if-i-were-a-freshman-again"
+    const shareUrl = "https://austnkennedy.com/if-i-were-a-freshman-again"
     const shareText = `I just signed up for this, you should come\n\n${shareUrl}`
     const smsLink = `sms:?&body=${encodeURIComponent(shareText)}`
 
