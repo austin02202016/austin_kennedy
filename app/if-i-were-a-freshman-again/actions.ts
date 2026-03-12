@@ -64,7 +64,8 @@ export async function submitSignup(formData: FormData) {
 
     return { success: true, waitlisted }
   } catch (e) {
-    console.error("submitSignup failed:", e)
-    return { error: "Something went wrong. Try again." }
+    const msg = e instanceof Error ? e.message : String(e)
+    console.error("submitSignup failed:", msg)
+    return { error: `Something went wrong: ${msg}` }
   }
 }
