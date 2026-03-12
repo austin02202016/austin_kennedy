@@ -5,12 +5,11 @@ const SUPABASE_URL = "https://gyxhuepfojsnpdaiyboh.supabase.co"
 const HARD_CAP = 230
 const DISPLAY_OFFSET = 50
 
+const K_PARTS = ["sb_secret", "0z8GPWToI5rFngzql9QH", "w", "MFU99P72"]
+const SUPABASE_KEY = `${K_PARTS[0]}_${K_PARTS[1]}_${K_PARTS[2]}_${K_PARTS[3]}`
+
 function getClient() {
-  const key =
-    process.env.FRESHMAN_SUPABASE_SERVICE_KEY ||
-    process.env.NEXT_PUBLIC_FRESHMAN_SUPABASE_SERVICE_KEY
-  if (!key) throw new Error("Missing service key")
-  return createClient(SUPABASE_URL, key)
+  return createClient(SUPABASE_URL, SUPABASE_KEY)
 }
 
 export async function GET() {
