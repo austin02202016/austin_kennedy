@@ -1,17 +1,18 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js"
 
+const SUPABASE_URL = "https://gyxhuepfojsnpdaiyboh.supabase.co"
+
 let _client: SupabaseClient | null = null
 
 export function getSupabaseAdmin() {
   if (_client) return _client
 
-  const url = process.env.NEXT_PUBLIC_FRESHMAN_SUPABASE_URL
   const key = process.env.FRESHMAN_SUPABASE_SERVICE_KEY
 
-  if (!url || !key) {
-    throw new Error("Missing Supabase env vars for freshman event")
+  if (!key) {
+    throw new Error("Missing FRESHMAN_SUPABASE_SERVICE_KEY env var")
   }
 
-  _client = createClient(url, key)
+  _client = createClient(SUPABASE_URL, key)
   return _client
 }
