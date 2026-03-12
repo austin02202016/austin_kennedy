@@ -1,7 +1,6 @@
 "use client"
 
-import { useActionState, useEffect, useState } from "react"
-import { submitSignup, getSignupCount } from "./actions"
+import { useState, useEffect } from "react"
 
 const ATTENDEE_PICS = [
   "/attendee-1.png",
@@ -11,26 +10,40 @@ const ATTENDEE_PICS = [
   "/attendee-5.png",
 ]
 
-type FormState = {
-  error?: string
-  success?: boolean
-  waitlisted?: boolean
-} | null
-
-async function handleSubmit(
-  _prevState: FormState,
-  formData: FormData
-): Promise<FormState> {
-  return await submitSignup(formData)
-}
-
 export function SignupForm() {
-  const [state, action, isPending] = useActionState(handleSubmit, null)
+  const [state, setState] = useState<{ error?: string; success?: boolean; waitlisted?: boolean } | null>(null)
+  const [isPending, setIsPending] = useState(false)
   const [count, setCount] = useState<number | null>(null)
 
   useEffect(() => {
-    getSignupCount().then(({ display }) => setCount(display))
+    fetch("/api/freshman-signup")
+      .then((r) => r.json())
+      .then((d) => setCount(d.display))
+      .catch(() => setCount(50))
   }, [state?.success])
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setIsPending(true)
+    const form = new FormData(e.currentTarget)
+    try {
+      const res = await fetch("/api/freshman-signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.get("name"),
+          email: form.get("email"),
+          phone: form.get("phone"),
+        }),
+      })
+      const data = await res.json()
+      setState(data)
+    } catch {
+      setState({ error: "Something went wrong. Try again." })
+    } finally {
+      setIsPending(false)
+    }
+  }
 
   if (state?.success) {
     const shareUrl = "https://austnkennedy.com/if-i-were-a-freshman-again"
@@ -73,19 +86,19 @@ export function SignupForm() {
         Free food for everyone who registers. Limited seats — we&apos;ll be verifying at the door.
       </p>
 
-      <form action={action} className="space-y-3.5 text-left">
+      <form onSubmit={handleSubmit} className="space-y-3.5 text-left">
         {count !== null && (
           <div className="flex items-center gap-3 mb-1 justify-center md:justify-start">
             <div className="flex -space-x-2.5">
-            {ATTENDEE_PICS.map((src, i) => (
-              <img
-                key={src}
-                src={src}
-                alt=""
-                className="w-8 h-8 rounded-full object-cover border-2 border-neutral-50"
-                style={{ zIndex: ATTENDEE_PICS.length - i }}
-              />
-            ))}
+              {ATTENDEE_PICS.map((src, i) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt=""
+                  className="w-8 h-8 rounded-full object-cover border-2 border-neutral-50"
+                  style={{ zIndex: ATTENDEE_PICS.length - i }}
+                />
+              ))}
             </div>
             <p className="text-[13px] text-neutral-500">
               <span className="font-semibold text-neutral-900">{count}</span> already registered
@@ -140,13 +153,13 @@ export function SignupForm() {
         )}
 
         <div className="flex justify-center mt-1">
-        <button
-          type="submit"
-          disabled={isPending}
-          className="bg-neutral-900 text-white font-medium text-sm rounded-lg py-2.5 px-10 hover:bg-neutral-800 active:scale-[0.99] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm shadow-neutral-900/10"
-        >
-          {isPending ? "Submitting..." : "Let's run it"}
-        </button>
+          <button
+            type="submit"
+            disabled={isPending}
+            className="bg-neutral-900 text-white font-medium text-sm rounded-lg py-2.5 px-10 hover:bg-neutral-800 active:scale-[0.99] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm shadow-neutral-900/10"
+          >
+            {isPending ? "Submitting..." : "Let's run it"}
+          </button>
         </div>
       </form>
     </div>
