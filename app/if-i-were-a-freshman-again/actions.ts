@@ -6,13 +6,23 @@ const HARD_CAP = 230
 const DISPLAY_OFFSET = 50
 
 export async function getSignupCount() {
-  const supabase = getSupabaseAdmin()
-  const { count } = await supabase
-    .from("event_signups")
-    .select("*", { count: "exact", head: true })
+  try {
+    const supabase = getSupabaseAdmin()
+    const { count, error } = await supabase
+      .from("event_signups")
+      .select("*", { count: "exact", head: true })
 
-  const actual = count ?? 0
-  return { display: actual + DISPLAY_OFFSET, actual, full: actual >= HARD_CAP }
+    if (error) {
+      console.error("Count query error:", error)
+      return { display: DISPLAY_OFFSET, actual: 0, full: false }
+    }
+
+    const actual = count ?? 0
+    return { display: actual + DISPLAY_OFFSET, actual, full: actual >= HARD_CAP }
+  } catch (e) {
+    console.error("getSignupCount failed:", e)
+    return { display: DISPLAY_OFFSET, actual: 0, full: false }
+  }
 }
 
 export async function submitSignup(formData: FormData) {
@@ -35,21 +45,26 @@ export async function submitSignup(formData: FormData) {
     return { error: "Please enter a valid phone number." }
   }
 
-  const { actual } = await getSignupCount()
-  const waitlisted = actual >= HARD_CAP
+  try {
+    const { actual } = await getSignupCount()
+    const waitlisted = actual >= HARD_CAP
 
-  const supabase = getSupabaseAdmin()
-  const { error: dbError } = await supabase
-    .from("event_signups")
-    .insert({ name: name.trim(), email: emailLower, phone: phoneClean, waitlisted })
+    const supabase = getSupabaseAdmin()
+    const { error: dbError } = await supabase
+      .from("event_signups")
+      .insert({ name: name.trim(), email: emailLower, phone: phoneClean, waitlisted })
 
-  if (dbError) {
-    if (dbError.code === "23505") {
-      return { error: "You've already signed up!" }
+    if (dbError) {
+      if (dbError.code === "23505") {
+        return { error: "You've already signed up!" }
+      }
+      console.error("Signup error:", dbError)
+      return { error: "Something went wrong. Try again." }
     }
-    console.error("Signup error:", dbError)
+
+    return { success: true, waitlisted }
+  } catch (e) {
+    console.error("submitSignup failed:", e)
     return { error: "Something went wrong. Try again." }
   }
-
-  return { success: true, waitlisted }
 }
