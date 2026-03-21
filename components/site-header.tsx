@@ -20,9 +20,9 @@ export function SiteHeader() {
               <NavLink href="/" active={pathname === "/"}>
                 Home
               </NavLink>
-              <NavLink href="/chat" active={pathname === "/chat"}>
+              {/* <NavLink href="/chat" active={pathname === "/chat"}>
                 Chat with Me
-              </NavLink>
+              </NavLink> */}
               <NavLink href="/short-form" active={pathname === "/short-form"}>
                 Short-Form
               </NavLink>
@@ -55,9 +55,9 @@ export function SiteHeader() {
           <MobileNavLink href="/" active={pathname === "/"}>
             Home
           </MobileNavLink>
-          <MobileNavLink href="/chat" active={pathname === "/chat"}>
+          {/* <MobileNavLink href="/chat" active={pathname === "/chat"}>
             Chat with Me
-          </MobileNavLink>
+          </MobileNavLink> */}
           <MobileNavLink href="/short-form" active={pathname === "/short-form"}>
             Short-Form
           </MobileNavLink>

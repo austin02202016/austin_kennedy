@@ -141,7 +141,7 @@ export default function HomePage() {
                 {">"} sleep on my couch
               </a>
 
-              <div className="flex items-center gap-2">
+              {/* <div className="flex items-center gap-2">
                 <Link
                   href="/chat"
                   className="text-base text-zinc-900 hover:text-zinc-500 transition-colors"
@@ -151,7 +151,7 @@ export default function HomePage() {
                 <span className="bg-blue-500 text-white text-[11px] font-semibold rounded-full min-w-[24px] h-5 flex items-center justify-center leading-none px-1">
                   +2
                 </span>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
