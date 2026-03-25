@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { findRso } from "./rso-config"
 
 const ATTENDEE_PICS = [
   "/attendee-1.png",
@@ -14,6 +15,8 @@ export function SignupForm() {
   const [state, setState] = useState<{ error?: string; success?: boolean; waitlisted?: boolean } | null>(null)
   const [isPending, setIsPending] = useState(false)
   const [count, setCount] = useState<number | null>(null)
+  const [promoCode, setPromoCode] = useState("")
+  const matchedRso = promoCode ? findRso(promoCode) : undefined
 
   useEffect(() => {
     fetch("/api/freshman-signup")
@@ -34,6 +37,7 @@ export function SignupForm() {
           name: form.get("name"),
           email: form.get("email"),
           phone: form.get("phone"),
+          promo_code: promoCode,
         }),
       })
       const data = await res.json()
@@ -63,6 +67,17 @@ export function SignupForm() {
             ? "We\u2019ll text you if a spot opens up."
             : "We\u2019ll text you the details closer to the event."}
         </p>
+        {matchedRso && !state.waitlisted && (
+          <div className="bg-neutral-100 rounded-lg px-4 py-3 mb-6 text-left">
+            <div className="flex items-center gap-2 mb-1.5">
+              <img src={matchedRso.icon} alt={matchedRso.name} className="h-5 object-contain" />
+              <span className="text-xs font-semibold text-neutral-700">{matchedRso.name} Perk</span>
+            </div>
+            <p className="text-[13px] text-neutral-500 leading-relaxed">
+              {matchedRso.perkMessage}
+            </p>
+          </div>
+        )}
         <a
           href={smsLink}
           className="inline-block bg-neutral-900 text-white font-medium text-sm rounded-lg py-2.5 px-10 hover:bg-neutral-800 active:scale-[0.99] transition-all shadow-sm shadow-neutral-900/10 text-center"
@@ -83,7 +98,7 @@ export function SignupForm() {
       </h1>
 
       <p className="text-[15px] text-neutral-500 leading-relaxed mb-8 max-w-sm mx-auto md:mx-0">
-        Free food for everyone who registers. Limited seats — we&apos;ll be verifying at the door.
+        Free Atomic Wings and pizza for everyone who registers. Limited seats — we&apos;ll be verifying at the door.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-3.5 text-left">
@@ -146,6 +161,32 @@ export function SignupForm() {
             placeholder="(217) 555-0123"
             className="w-full bg-white border border-neutral-200 rounded-lg px-3.5 py-2.5 text-base text-neutral-900 placeholder:text-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutral-900/5 focus:border-neutral-300 transition-all"
           />
+        </div>
+
+        <div>
+          <label htmlFor="promo" className="block text-[11px] text-neutral-400 mb-1.5 tracking-wide uppercase font-medium">
+            Promo code <span className="normal-case text-neutral-300">(optional)</span>
+          </label>
+          <div className="relative">
+            <input
+              id="promo"
+              name="promo_code"
+              type="text"
+              value={promoCode}
+              onChange={(e) => setPromoCode(e.target.value)}
+              disabled={isPending}
+              maxLength={50}
+              placeholder="Enter code"
+              className={`w-full bg-white border border-neutral-200 rounded-lg px-3.5 py-2.5 text-base text-neutral-900 placeholder:text-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutral-900/5 focus:border-neutral-300 transition-all ${matchedRso ? "pr-10" : ""}`}
+            />
+            {matchedRso && (
+              <img
+                src={matchedRso.icon}
+                alt={matchedRso.name}
+                className="absolute right-3 top-1/2 -translate-y-1/2 h-6 object-contain"
+              />
+            )}
+          </div>
         </div>
 
         {state?.error && (
