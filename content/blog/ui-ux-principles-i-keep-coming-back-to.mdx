@@ -1,0 +1,47 @@
+---
+title: "UI/UX Principles I Keep Coming Back To"
+description: "A running list of UI/UX principles that keep proving themselves true."
+publishedAt: 2026-03-25
+author: "Austin Kennedy"
+tags: ["Design", "Engineering", "Product"]
+featured: false
+seo:
+  metaTitle: "UI/UX Principles I Keep Coming Back To"
+  metaDescription: "A running list of UI/UX principles that keep proving themselves true."
+---
+
+Note to self: keep adding to this
+
+## 1. Screen real estate should be proportional to value
+
+The percentage of screen real estate a component takes up should be one-to-one with how valuable it is at that moment.
+
+"Valuable" means two things: how frequently it's used, and how important it is when it actually is used. Those two things aren't always the same — and that tension is where most UI mistakes get made.
+
+Settings is a good example. When someone needs to find settings, it's immediately intuitive how important that is — pretty important. But it's also used almost never. So you hide it. It doesn't need to be front and center.
+
+The same logic applies at the component level. At Origami, we were building a table view and had this cell that originally showed "see all fields." That's not valuable. What's actually valuable — what somebody scanning that table actually wants to know — is who this person is. Their name. Their photo. So we replaced "see all fields" with a profile photo and name, and it felt immediately more intuitive.
+
+That decision is simple in hindsight, but it's downstream of a real question: what is the most important thing here to somebody right now? Ask that question about every component you build.
+
+## 2. Database relationships should be reflected visually
+
+Objects that have a relationship — parent/child, sibling, one-to-many, many-to-one — should be visualized in a way that reflects that relationship. Different database structures call for different UI patterns.
+
+Hierarchical (parent/child)? Use a folder view, or a collapsible — where a parent card can expand to reveal child objects nested inside it. The visual nesting communicates the structural nesting.
+
+Where this goes wrong: you have three objects on the same screen, all in the same flat card component, and each of them has a one-to-many relationship that is itself one-to-many. You're showing all of that at the same hierarchy level. It looks like they're siblings when they're not.
+
+Users make relational assumptions based on how things appear visually. If two things are at the same visual level, they assume those things are at the same structural level. When that's not true, you've introduced confusion that no amount of documentation fixes.
+
+## 3. Hover states, tooltips, and modals aren't interchangeable
+
+There's a spectrum here based on friction, and each point on that spectrum signals something different to the user.
+
+Hover — zero clicks. It's passive, low commitment, and works well for things a user might want to glance at in sequence. If someone is scanning a list and hovering across multiple items quickly, that's the right pattern. It's optional information that shows up without interrupting.
+
+Click / on-click — one click to open, one to close. More intentional. The user is choosing to engage with something.
+
+Modal — you're pulling someone's full attention into a single focused view. One click to open, one to close, but you're creating real friction on purpose. Modals should be reserved for moments where you want that friction — where you specifically need all of their attention, and where closing requires a deliberate action.
+
+The mistake is using modals for things that don't warrant that level of interruption, or using hover states for things that actually need someone's full focus. The component you choose communicates the weight of the interaction. Don't mismatch them.
