@@ -35,7 +35,7 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, phone } = await req.json()
+    const { name, email, phone, promo_code } = await req.json()
 
     if (!name || !email || !phone) {
       return NextResponse.json({ error: "All fields are required." }, { status: 400 })
@@ -53,6 +53,11 @@ export async function POST(req: NextRequest) {
 
     const supabase = getClient()
 
+    const promoValue =
+      typeof promo_code === "string" && promo_code.trim() !== ""
+        ? promo_code.toLowerCase().trim()
+        : null
+
     const { count } = await supabase
       .from("event_signups")
       .select("*", { count: "exact", head: true })
@@ -62,7 +67,7 @@ export async function POST(req: NextRequest) {
 
     const { error: dbError } = await supabase
       .from("event_signups")
-      .insert({ name: name.trim(), email: emailLower, phone: phoneClean, waitlisted })
+      .insert({ name: name.trim(), email: emailLower, phone: phoneClean, waitlisted, promo_code: promoValue })
 
     if (dbError) {
       if (dbError.code === "23505") {
