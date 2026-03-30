@@ -2,8 +2,7 @@
 
 import { getSupabaseAdmin } from "@/lib/supabase-freshman"
 
-const HARD_CAP = 230
-const DISPLAY_OFFSET = 50
+const HARD_CAP = 250
 
 export async function getSignupCount() {
   try {
@@ -14,14 +13,14 @@ export async function getSignupCount() {
 
     if (error) {
       console.error("Count query error:", error)
-      return { display: DISPLAY_OFFSET, actual: 0, full: false }
+      return { display: 0, actual: 0, full: false }
     }
 
     const actual = count ?? 0
-    return { display: actual + DISPLAY_OFFSET, actual, full: actual >= HARD_CAP }
+    return { display: actual, actual, full: actual >= HARD_CAP }
   } catch (e) {
     console.error("getSignupCount failed:", e)
-    return { display: DISPLAY_OFFSET, actual: 0, full: false }
+    return { display: 0, actual: 0, full: false }
   }
 }
 
