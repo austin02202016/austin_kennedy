@@ -2,8 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { createClient } from "@supabase/supabase-js"
 
 const SUPABASE_URL = "https://gyxhuepfojsnpdaiyboh.supabase.co"
-const HARD_CAP = 230
-const DISPLAY_OFFSET = 50
+const HARD_CAP = 250
 
 const K_PARTS = ["sb_secret", "0z8GPWToI5rFngzql9QH", "w", "MFU99P72"]
 const SUPABASE_KEY = `${K_PARTS[0]}_${K_PARTS[1]}_${K_PARTS[2]}_${K_PARTS[3]}`
@@ -20,16 +19,16 @@ export async function GET() {
       .select("*", { count: "exact", head: true })
 
     if (error) {
-      return NextResponse.json({ display: DISPLAY_OFFSET, full: false })
+      return NextResponse.json({ display: 0, full: false })
     }
 
     const actual = count ?? 0
     return NextResponse.json({
-      display: actual + DISPLAY_OFFSET,
+      display: actual,
       full: actual >= HARD_CAP,
     })
   } catch {
-    return NextResponse.json({ display: DISPLAY_OFFSET, full: false })
+    return NextResponse.json({ display: 0, full: false })
   }
 }
 

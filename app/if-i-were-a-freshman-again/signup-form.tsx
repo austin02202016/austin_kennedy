@@ -22,7 +22,7 @@ export function SignupForm() {
     fetch("/api/freshman-signup")
       .then((r) => r.json())
       .then((d) => setCount(d.display))
-      .catch(() => setCount(50))
+      .catch(() => setCount(0))
   }, [state?.success])
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
