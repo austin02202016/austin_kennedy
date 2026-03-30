@@ -33,7 +33,7 @@ export function TiltImage() {
       <div className="absolute -inset-[2px] rounded-2xl bg-neutral-50" />
       <Image
         src="/freshman-event.png"
-        alt="If I Were a Freshman Again — Monday April 7, 6-8PM at CIF 0035. Featuring Arya Nagabhryu, Casper Capital, Yuna Batmunkh, Chikelu Egbuna, Monisa Yusra, Jay Yang, Luna Bitar, and Austin Majors."
+        alt="If I Were a Freshman Again — Tuesday April 7, 6-8PM at CIF 0035. Featuring Arya Nagabhryu, Casper Capital, Yuna Batmunkh, Chikelu Egbuna, Monisa Yusra, Jay Yang, Luna Bitar, and Adan Somarriba."
         width={800}
         height={1000}
         className="relative w-full rounded-xl"
