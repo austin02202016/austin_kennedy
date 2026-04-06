@@ -62,11 +62,11 @@ export async function POST(req: NextRequest) {
       .select("*", { count: "exact", head: true })
 
     const actual = count ?? 0
-    const waitlisted = actual >= HARD_CAP
+    const overCapacity = actual >= 230
 
     const { error: dbError } = await supabase
       .from("event_signups")
-      .insert({ name: name.trim(), email: emailLower, phone: phoneClean, waitlisted, promo_code: promoValue })
+      .insert({ name: name.trim(), email: emailLower, phone: phoneClean, waitlisted: false, promo_code: promoValue })
 
     if (dbError) {
       if (dbError.code === "23505") {
@@ -75,7 +75,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Something went wrong. Try again." }, { status: 500 })
     }
 
-    return NextResponse.json({ success: true, waitlisted })
+    return NextResponse.json({ success: true, waitlisted: false, overCapacity })
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e)
     return NextResponse.json({ error: `Something went wrong: ${msg}` }, { status: 500 })

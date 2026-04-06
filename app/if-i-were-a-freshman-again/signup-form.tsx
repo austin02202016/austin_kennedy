@@ -12,7 +12,7 @@ const ATTENDEE_PICS = [
 ]
 
 export function SignupForm() {
-  const [state, setState] = useState<{ error?: string; success?: boolean; waitlisted?: boolean } | null>(null)
+  const [state, setState] = useState<{ error?: string; success?: boolean; waitlisted?: boolean; overCapacity?: boolean } | null>(null)
   const [isPending, setIsPending] = useState(false)
   const [count, setCount] = useState<number | null>(null)
   const [promoCode, setPromoCode] = useState("")
@@ -60,13 +60,17 @@ export function SignupForm() {
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-neutral-900"><polyline points="20 6 9 17 4 12" /></svg>
         </div>
         <p className="text-neutral-900 font-semibold text-xl tracking-tight mb-1.5">
-          {state.waitlisted ? "You\u2019re on the waitlist." : "You\u2019re in."}
+          You{'\u2019'}re registered.
         </p>
-        <p className="text-neutral-400 text-[14px] mb-8">
-          {state.waitlisted
-            ? "We\u2019ll text you if a spot opens up."
-            : "We\u2019ll text you the details closer to the event."}
+        <p className="text-neutral-400 text-[14px] mb-2">
+          We{'\u2019'}ll text you the details closer to the event.
         </p>
+        {state.overCapacity && (
+          <p className="text-amber-600 text-[13px] font-medium mb-6 bg-amber-50 rounded-lg px-4 py-2.5">
+            Seats are almost full — get there by 5:30 to guarantee entry. After 230 are in, we can{'\u2019'}t let anyone else in.
+          </p>
+        )}
+        {!state.overCapacity && <div className="mb-6" />}
         {matchedRso && !state.waitlisted && (
           <div className="bg-neutral-100 rounded-lg px-4 py-3 mb-6 text-left">
             <div className="flex items-center gap-2 mb-1.5">

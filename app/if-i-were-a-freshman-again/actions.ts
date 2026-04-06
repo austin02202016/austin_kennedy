@@ -46,12 +46,12 @@ export async function submitSignup(formData: FormData) {
 
   try {
     const { actual } = await getSignupCount()
-    const waitlisted = actual >= HARD_CAP
+    const overCapacity = actual >= 230
 
     const supabase = getSupabaseAdmin()
     const { error: dbError } = await supabase
       .from("event_signups")
-      .insert({ name: name.trim(), email: emailLower, phone: phoneClean, waitlisted })
+      .insert({ name: name.trim(), email: emailLower, phone: phoneClean, waitlisted: false })
 
     if (dbError) {
       if (dbError.code === "23505") {
@@ -61,7 +61,7 @@ export async function submitSignup(formData: FormData) {
       return { error: "Something went wrong. Try again." }
     }
 
-    return { success: true, waitlisted }
+    return { success: true, waitlisted: false, overCapacity }
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e)
     console.error("submitSignup failed:", msg)
