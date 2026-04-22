@@ -85,6 +85,12 @@ export default function HomePage() {
                 {">"} my story
               </Link>
               <Link
+                href="/growth"
+                className="block text-base text-zinc-900 hover:text-zinc-500 transition-colors"
+              >
+                {">"} growth eng projects
+              </Link>
+              <Link
                 href="/projects"
                 className="block text-base text-zinc-900 hover:text-zinc-500 transition-colors"
               >
