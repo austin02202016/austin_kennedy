@@ -32,6 +32,9 @@ export function SiteHeader() {
               <NavLink href="/podcasts" active={pathname === "/podcasts"}>
                 Podcasts
               </NavLink>
+              <NavLink href="/growth" active={pathname.startsWith("/growth")}>
+                Growth Eng Projects
+              </NavLink>
               <NavLink href="/about" active={pathname === "/about"}>
                 My Life
               </NavLink>
@@ -66,6 +69,9 @@ export function SiteHeader() {
           </MobileNavLink>
           <MobileNavLink href="/podcasts" active={pathname === "/podcasts"}>
             Podcasts
+          </MobileNavLink>
+          <MobileNavLink href="/growth" active={pathname.startsWith("/growth")}>
+            Growth Eng Projects
           </MobileNavLink>
           <MobileNavLink href="/about" active={pathname === "/about"}>
             My Life
