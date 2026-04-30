@@ -1,0 +1,121 @@
+---
+title: "Three Weeks of Griot"
+description: "What 23 meetings, 7 demos, and one uncomfortable conversation taught me about the product I thought I was building."
+publishedAt: 2026-04-30
+author: Austin Kennedy
+tags: ["Griot", "Startups", "Product", "Pivot", "Content"]
+featured: true
+seo:
+  metaTitle: "Three Weeks of Griot | Austin Kennedy"
+  metaDescription: "What 23 meetings, 7 demos, and one uncomfortable conversation taught me about the product I thought I was building. A founder's honest account of a pivot."
+---
+
+# Three Weeks of Griot
+
+## What 23 meetings, 7 demos, and one uncomfortable conversation taught me about the product I thought I was building.
+
+---
+
+There's a version of this post where I tell you Griot is a runaway success. There's also a version where I tell you it's dead. Neither is true. What's true is that for three weeks I demoed the same product to a lot of different people, and the people who were supposed to love it didn't, and the people who weren't supposed to be the customer kept saying "this is so cool."
+
+That's the story. The rest of this is what the data showed me, who said what, and what I'm building now.
+
+---
+
+## The original bet
+
+I started Griot believing the customer was a head of content at a ghostwriting agency. The thesis was simple: agencies manage 20 to 40 client profiles, every profile has its own context, voice, post history, and analytics, and that context is fragmented across Notion, Sprout, Google Drive, screenshots, and people's heads. Build the system that consolidates it, and you sell a $500 to $2,500 per month tool to operators who genuinely feel the pain.
+
+I'd run that exact business — Lever Brands, 42 clients — so I wasn't guessing. I knew the workflow.
+
+The product I shipped was an MCP server plus a web app that pulls posts and engagement data from a creator's accounts, exposes it to Claude as structured context, and lets a content team work against that context inside Claude rather than re-uploading screenshots every time. I onboarded my own profiles. I onboarded clients I ghostwrite for. I started doing demos.
+
+Three weeks later, here's what the demos actually said.
+
+---
+
+## The demos that lit up
+
+**Adan, on April 17.** Adan runs content for Casper. We connected Casper's Facebook account live during the call and scraped 50 posts. He set up the Claude MCP integration in the same call. He immediately mapped it onto his existing stack — $60/month Nan, $60/month Apify, plus a VA doing manual scrolling — and saw the obvious replacement. He left the call planning to test the integration that night and asking whether Mel could use it for Instagram.
+
+**TJ, on April 20.** TJ already runs his own LinkedIn content via Claude Co-work — five posts a day, three hook variations each, scheduled tasks scraping competitor accounts via the Claude Chrome extension. He spent ninety minutes setting it up himself. When I demoed Griot, the reaction was: this is the productized version of what I built manually. Two-minute setup instead of ninety. Auto-sync instead of re-scraping. He committed to testing it that night.
+
+**Justin, on April 20.** Justin had just started a content role and was screenshotting Sprout carousel text by hand to feed into Claude. We set up the Inner Game integration during the call, pulled his top 25 Instagram posts, and generated 10 Twitter threads from the highest performers. He went from a manual workflow to an automated pipeline in a single demo.
+
+**Luna, on April 21.** Luna's reaction was the cleanest read I got. She said *"this is so cool."* Then she told me she's been manually feeding competitor content to Claude for months. The product wasn't introducing her to a workflow. It was automating the one she'd already invented.
+
+That's four demos, four immediate yeses, and one consistent pattern: the people who said "holy fuck" were the people *already doing this manually.* They didn't need the workflow explained. They needed the manual labor removed.
+
+---
+
+## The demo that didn't
+
+**Josh, on April 21.** Josh runs a multi-brand agency: Notice Media for larger teams at $2,500 to $4,000 a month, Orca for solopreneurs at $1,000 a month, Thrive Letter at $1,800 a month, plus a Reddit tool and a B2B show. He has 50 to 100 clients across his brands. Writers manage three to ten each. He was, on paper, the exact buyer the original Griot was built for.
+
+He politely told me I had the wrong product.
+
+His point — which I want to quote because it cut clean through six months of my thinking — was that **content agency organization isn't actually the primary pain point.** Most agencies, given enough time, build functional workflows. Notion, despite its limitations, remains dominant. The pain I'd built around exists, but it's not severe enough to break someone out of the tools they already use. He'd already paid $2,000 to a Notion consultant to build a custom dashboard. He spent $700 a month across 14 different tools. He wasn't going to switch.
+
+What he said next is the sentence I'm now building around. He told me the real opportunity isn't organizing content workflows — it's becoming the **intelligence layer** that replaces the fragmented marketing stack. The customer isn't the head of content at the agency. It's the **individual contributor** who values personal branding, can't afford an agency, and can purchase a $100 to $300 a month tool without C-level approval.
+
+I'd spent six months building a tool for the people who manage 40 brands. He told me to build it for one of them.
+
+---
+
+## The pattern I missed
+
+When I lay the demos out next to each other, the pattern is obvious in retrospect.
+
+Adan was using Griot for Casper *and* for himself. Luna's reaction wasn't about a client roster — it was about her own content. TJ's manual setup was for his own LinkedIn. Justin was at the start of a content career, using it for the brands he managed, but his own Claude project for personal posts was running in parallel.
+
+Every person who lit up was, to some degree, **their own head of content.** The agency framing was an extra layer. What they actually wanted was the system that does for them what they'd hire someone to do if they had the budget — and the people who couldn't afford that someone were the ones leaning forward.
+
+The original Griot had built the dashboard. What they needed was the assistant.
+
+---
+
+## The pivot
+
+So here's what Griot is now.
+
+**The customer is a 22-to-40-year-old self-purchaser** — founder, operator, individual contributor at a company, fractional consultant, ghostwriter running their own brand alongside their clients — who wants the personal brand outcomes that a ghostwriting agency provides, can put it on a credit card, and tops out around $200 to $300 a month.
+
+**The product is "head of content in your pocket"** — a context machine that knows your voice, your past posts, your competitors, and your meetings, and gives you the asset you'd otherwise pay an agency $5K a month for. Voice memo in the car turns into a draft by the time you're parked. A Granola transcript surfaces a thread idea you forgot you had. A competitor's hook structure shows up in your queue with a suggested adaptation.
+
+**The wedge is one free utility at a time.** Josh's framing here is right: launch one tool a month, free at the top of the funnel, ladder up to $100, $300, and a higher tier underneath. URL-to-context exporter for Claude. Competitor hook extractor. Voice-memo-to-draft. Each one solves a specific pain in isolation. Together they're a stack.
+
+**The bet is that nobody else is building this for this customer.** Sandcastle is closer to the agency end. Stan is closer to the creator-monetization end. The middle — the operator who has a job, has a brand, has opinions, and doesn't have a content team — is open.
+
+---
+
+## What I'm doing differently
+
+Three things, mostly mechanical.
+
+**I'm dogfooding more aggressively.** I'm an alpha user of the new Griot, not a sympathetic founder watching from outside. The product has to work for my own content workflow before it ships to anyone else. If I can't run my own content machine through it, neither can anyone in the new ICP.
+
+**I'm not signing a paid ghostwriting client to validate it.** I considered this. A friend offered to pay $2K to $3K a month if I used the product on his account. The math works for a month and ruins the business — it pulls me back into doing the agency work I left, and it collapses the product into "Austin's ghostwriting tool" instead of letting it generalize. The discipline is to keep my hands off other people's content and let the product be the leverage.
+
+**I'm running the next round of demos against the new ICP, not the old one.** The agency conversations will continue where they make sense, but the next 15 calls are with people in the 22-40 self-purchaser segment. Names, not categories. If I can't fill 15 slots with named people in two weeks, the new ICP isn't real and I sharpen the thesis again.
+
+---
+
+## What this is not
+
+This is not a "we pivoted, we figured it out, ship the press release" post. The new bet is a bet. Josh could be wrong. The 4 yeses from Adan, TJ, Justin, and Luna could turn out to be polite enthusiasm that doesn't translate into paid usage. The unit economics on $200 a month customers depend on volume I haven't proven yet.
+
+What I do know is that the original Griot wasn't pulling, and you don't fix a product that isn't pulling by building more of it. You go ask better questions. I asked better questions. The answers pointed in a different direction. The pivot is the integrity move, not the failure.
+
+---
+
+## Why I'm publishing this
+
+Because if I'm going to spend the next three to six months building this version of Griot, I'd rather build it in public than build it quietly and announce a clean version after the fact. Two reasons.
+
+The first is selfish. Writing this down forces me to actually decide. Every sentence above is a commitment I'd have to walk back publicly if I drifted off it. That's good — drift is the failure mode I'm trying to avoid.
+
+The second is that the ICP is reading this. If you're a 22-40 year old who wants to run a serious content motion without paying agency rates, you are exactly the person I'm building for. I'd like to talk to you. The DM is open.
+
+---
+
+*Three weeks in. Pivot logged. Back to building.*
