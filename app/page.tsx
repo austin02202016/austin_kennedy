@@ -147,6 +147,13 @@ export default function HomePage() {
                 {">"} sleep on my couch
               </a>
 
+              <Link
+                href="/consult"
+                className="block text-base text-zinc-900 hover:text-zinc-500 transition-colors"
+              >
+                {">"} book a paid call
+              </Link>
+
               {/* <div className="flex items-center gap-2">
                 <Link
                   href="/chat"
