@@ -1,0 +1,88 @@
+// Agent-mode guides for blog posts.
+//
+// Some posts ship a second, machine-facing version: a self-contained prompt the
+// reader can paste straight into Claude Code (or any coding agent), which then
+// walks them through doing the whole thing. Keyed by post slug. A post with no
+// entry here simply renders normally (no "For agents" toggle).
+
+export interface AgentGuide {
+  // Short line shown above the prompt explaining what to do with it.
+  intro: string
+  // The full prompt to paste into a coding agent.
+  prompt: string
+}
+
+const agentGuides: Record<string, AgentGuide> = {
+  "how-to-set-up-seo-and-aeo-from-scratch": {
+    intro:
+      "Paste this into Claude Code (or any coding agent) with access to your site's repo. It will ask you a few questions, then set up your SEO and AEO end to end — tooling, keywords, on-page wins, and the measurement loop.",
+    prompt: `You are my SEO/AEO setup engineer. Your job is to take my website from zero (or near-zero) search presence to ranking on Google AND getting cited by AI engines (ChatGPT, Perplexity, Google AI answers, Claude). Run the full playbook below, phase by phase. At the start of each phase, tell me what you are about to do and what you need from me. Do not skip the measurement loop, and never invent or inflate claims on the site.
+
+=== WHAT I NEED FROM YOU FIRST ===
+Ask me for anything below that you do not already have, then STOP and propose a plan before executing:
+1. My domain, and how the site is built/deployed (repo path or URL, framework, host).
+2. What the product does, who it is for, and the one thing that makes it the better choice (the "wedge").
+3. My main competitors (you will also discover more).
+4. A DataForSEO API key, or confirmation that a DataForSEO tool/MCP is available to you. This is the data spine — search volume, keyword difficulty (KD), CPC, live SERPs, ranked-keyword lists, backlinks, and on-page audits.
+5. Whether Google Search Console + GA4 are connected, and whether PostHog is installed.
+6. Whether Screaming Frog (and its MCP server) is available for the technical crawl.
+
+=== PHASE 0 — TOOLING ===
+Confirm the stack is ready before any analysis:
+- A place to run scheduled jobs (a small VM/VPS works well for daily crons).
+- DataForSEO reachable (key or tool).
+- Search Console + GA4 connected; submit the sitemap so Search Console starts logging impressions/positions. If the domain is not verified yet, proceed using DataForSEO only and flag the gap.
+- PostHog on the site for session replays.
+- Screaming Frog available for the crawl (or use DataForSEO's on-page endpoints).
+
+=== PHASE 1 — CHOOSE KEYWORDS ===
+1. Find competitors: ask me, then confirm with DataForSEO's competitor endpoints.
+2. For each competitor, pull their ranked keywords from DataForSEO (ranked-keywords / keywords-for-site).
+3. Build a master list of 150-500 keywords. For each, attach volume, KD (0-100), CPC, and search intent.
+4. Score every keyword on: volume, difficulty (lead with low KD on a new domain), value (CPC = how much the intent is worth), and winnability (be honest about our current authority).
+5. Group the list into clusters of ~5 related keywords each — every cluster becomes one page.
+6. Lock the wedge and a first-12 page plan. Rule: do not try to outrank a competitor's own homepage on its bare brand term — win the "[competitor] alternative", "X vs Y", and "is X worth it" slots (low KD, high intent, and the exact questions people ask AI).
+Deliver the scored list + cluster/page plan and get my sign-off before writing.
+
+=== PHASE 2 — WIN ===
+Win each keyword on four fronts:
+
+A) TECHNICALS (can Google crawl and understand the site — do this first):
+- Ensure sitemap.xml exists and is submitted; robots.txt is present and open to AI crawlers.
+- Content renders server-side (words must be in the HTML, not only after client JS).
+- One canonical URL per page; force www <-> bare-domain redirects so the site is not split into two.
+- Crawl with Screaming Frog (or its MCP) / DataForSEO on-page and fix every redirect chain, render issue, broken schema, and slow page. Add structured data (Organization, BlogPosting, FAQPage, Product where relevant).
+- Remove any unverified claims (e.g. inflated counts) — Google reviews and penalizes these.
+
+B) CONTENT:
+- Turn each ~5-keyword cluster into a page. Build more than blogs: free tools, calculators, and databases earn clicks and links that articles do not.
+- Lead each page with a direct answer. Put the year in time-sensitive titles. Write for the human.
+- Internal linking: treat the homepage as a pool of authority; link new/important pages from the homepage and to each other so they inherit weight.
+
+C) AUTHORITY (only backlinks move domain rating — quantity AND quality):
+- Submit to startup directories (Product Hunt, Crunchbase, Trustpilot, G2, and the long tail) — lowest-hanging fruit.
+- Pull the backlink profiles of competitors ranking above us (DataForSEO backlinks endpoint); their linkers are our outreach list — email them for links.
+- Add Reddit/forum posts, a small free product or Chrome extension that links back, and cold-outreach to journalists/newsletters for press.
+
+D) CITATIONS / AEO:
+- Write quick answers and FAQs into pages ("What does X do?", "How does X work?", "Is X worth it?") so AI engines can lift them.
+- Keep robots.txt open to AI crawlers; consider an llms.txt pointing to the best content.
+
+=== PHASE 3 — MEASURE & CONVERT ===
+- Read Search Console as a funnel: impressions -> clicks -> average position/CTR. Optimize for clicks (position drives them; page 2-3 gets ~none).
+- The core loop — SERP teardown: for a page that ranks but is stuck, pull the results above it and grab each one's content + domain authority. If someone outranks us with LOWER authority, it is a content problem (improve the page to match/beat how they use the keyword). If everyone above has HIGHER authority, it is an authority problem (get more backlinks to that page).
+- Use PostHog session replays + GA4 (scroll depth, time on page) to fix site-visit -> CTA conversion. Place one CTA ~1/3 in (or right after the intro) and one at the end; add a third mid-article for long posts. If there are clicks/visits but no CTA clicks, the content, the design, or the keyword relevance is the problem.
+
+=== PHASE 4 — TURN IT INTO A LOOP ===
+- Publish a new clustered page on a cadence (a daily cron on the VM).
+- Improve stuck-but-ranking pages using the SERP teardown to decide content-vs-authority each time.
+- Keep earning backlinks (directories -> competitor linkers -> press).
+- Review the Search Console funnel weekly and let it drive the next task. SEO compounds slowly — judge results over ~3 months, not days.
+
+Start now by asking me for the context in the first section, then propose the plan.`,
+  },
+}
+
+export function getAgentGuide(slug: string): AgentGuide | null {
+  return agentGuides[slug] ?? null
+}
