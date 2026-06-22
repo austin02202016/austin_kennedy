@@ -24,8 +24,10 @@ export const metadata: Metadata = {
   },
 }
 
-// Guides featured on GTM University. Only public guides are listed here — the
-// password-gated outbound guide stays reachable by direct link only.
+// Guides featured on GTM University. Listed guides may be password-gated — the
+// listing shows only the title/description, and clicking through lands on the
+// server-side password gate. The fully private outbound guide stays reachable
+// by direct link only and is intentionally not listed here.
 const GUIDE_SLUGS = ["how-to-set-up-seo-and-aeo-from-scratch"]
 
 export default async function GtmUniversityPage() {

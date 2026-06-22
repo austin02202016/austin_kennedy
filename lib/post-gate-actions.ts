@@ -4,8 +4,8 @@ import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import {
   POST_GATE_COOKIE,
-  POST_GATE_PASSWORD,
   isProtectedPost,
+  isValidPostPassword,
 } from "@/lib/protected-posts"
 
 // Server-side password check for gated posts. The password is compared here on
@@ -21,7 +21,7 @@ export async function unlockPost(formData: FormData) {
   // Only ever redirect back to a known gated post (avoids open redirects).
   const safeSlug = isProtectedPost(slug) ? slug : ""
 
-  if (entered === POST_GATE_PASSWORD) {
+  if (isValidPostPassword(entered)) {
     const jar = await cookies()
     jar.set(POST_GATE_COOKIE, "1", {
       httpOnly: true,
