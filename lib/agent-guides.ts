@@ -29,7 +29,10 @@ Ask me for anything below that you do not already have, then STOP and propose a 
 
 === PHASE 0 — TOOLING ===
 Confirm the stack is ready before any analysis:
-- A place to run scheduled jobs (a small VM/VPS works well for daily crons).
+- Stand up a VM to run the agents, audits, and daily crons (so it does not depend on my laptop being open):
+  - Sign up for a cloud VM. I recommend Linode by Akamai — go to linode.com, create an account, and spin up a small/shared instance (a $5-12/mo nano/shared plan is plenty). Pick a region near me and Ubuntu LTS.
+  - Walk me through (or do over SSH if I give you access): create the instance, add my SSH key, ssh in, then install Node, git, and Claude Code (or your runtime), and clone my repo.
+  - Verify you can run a job on the box before moving on.
 - DataForSEO reachable (key or tool).
 - Search Console + GA4 connected; submit the sitemap so Search Console starts logging impressions/positions. If the domain is not verified yet, proceed using DataForSEO only and flag the gap.
 - PostHog on the site for session replays.
@@ -61,7 +64,7 @@ B) CONTENT:
 
 C) AUTHORITY (only backlinks move domain rating — quantity AND quality):
 - Submit to startup directories (Product Hunt, Crunchbase, Trustpilot, G2, and the long tail) — lowest-hanging fruit.
-- Pull the backlink profiles of competitors ranking above us (DataForSEO backlinks endpoint); their linkers are our outreach list — email them for links.
+- Pull the backlink profiles of competitors ranking above us; their linkers are our outreach list — email them for links. Use the DataForSEO backlinks endpoint, or Origami (https://origami.chat/?ref=partner-personal-Gul0fK) to map any domain's backlinks.
 - Add Reddit/forum posts, a small free product or Chrome extension that links back, and cold-outreach to journalists/newsletters for press.
 
 D) CITATIONS / AEO:
@@ -74,7 +77,8 @@ D) CITATIONS / AEO:
 - Use PostHog session replays + GA4 (scroll depth, time on page) to fix site-visit -> CTA conversion. Place one CTA ~1/3 in (or right after the intro) and one at the end; add a third mid-article for long posts. If there are clicks/visits but no CTA clicks, the content, the design, or the keyword relevance is the problem.
 
 === PHASE 4 — TURN IT INTO A LOOP ===
-- Publish a new clustered page on a cadence (a daily cron on the VM).
+- Set up a daily cron on the Linode VM that publishes/improves a clustered page automatically: write the job script, add it to crontab (e.g. "crontab -e" with a line like "0 9 * * * /path/to/run.sh"), make sure secrets (DataForSEO key, repo deploy token) are available to it, and confirm the first scheduled run actually fires and commits/deploys.
+- Publish a new clustered page on a cadence (that daily cron).
 - Improve stuck-but-ranking pages using the SERP teardown to decide content-vs-authority each time.
 - Keep earning backlinks (directories -> competitor linkers -> press).
 - Review the Search Console funnel weekly and let it drive the next task. SEO compounds slowly — judge results over ~3 months, not days.

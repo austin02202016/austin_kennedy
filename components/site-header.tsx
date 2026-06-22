@@ -38,6 +38,9 @@ export function SiteHeader() {
               <NavLink href="/consult" active={pathname === "/consult"}>
                 Consulting
               </NavLink>
+              <NavLink href="/affiliates" active={pathname === "/affiliates"}>
+                Affiliates
+              </NavLink>
               <NavLink href="/about" active={pathname === "/about"}>
                 My Life
               </NavLink>
@@ -78,6 +81,9 @@ export function SiteHeader() {
           </MobileNavLink>
           <MobileNavLink href="/consult" active={pathname === "/consult"}>
             Consulting
+          </MobileNavLink>
+          <MobileNavLink href="/affiliates" active={pathname === "/affiliates"}>
+            Affiliates
           </MobileNavLink>
           <MobileNavLink href="/about" active={pathname === "/about"}>
             My Life
