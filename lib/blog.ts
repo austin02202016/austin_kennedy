@@ -3,6 +3,7 @@ import path from "path"
 import { marked } from "marked"
 import slugify from "slugify"
 import { getAuthor, type Author } from "./authors"
+import { isProtectedPost } from "./protected-posts"
 
 export interface BlogPost {
   slug: string
@@ -144,6 +145,10 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
   const posts = await Promise.all(
     files.map(async (file) => {
       const slug = file.replace(/\.mdx?$/, "")
+      // Password-gated posts are excluded from public listings (index, sitemap,
+      // related posts, static params). They render only at their direct URL
+      // behind the gate via getBlogPost().
+      if (isProtectedPost(slug)) return null
       return getBlogPost(slug)
     })
   )

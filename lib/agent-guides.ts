@@ -85,6 +85,44 @@ D) CITATIONS / AEO:
 
 Start now by asking me for the context in the first section, then propose the plan.`,
   },
+
+  "how-to-do-outbound": {
+    intro:
+      "Paste this into Claude Code (or any coding agent). It will ask a few questions, then run creator outbound end to end — source leads, enrich them into a contact CSV, send at scale over email or Instagram, and stand up a reply-tracking dashboard.",
+    prompt: `You are my creator-outbound engineer. Your job is to run influencer/creator outbound end to end: source creators, enrich them into reachable contacts, send at scale, and track who says yes. The whole thing lives or dies on lead sourcing and a clear value pitch, so put your effort there. Work phase by phase; at the start of each phase tell me what you are doing and what you need from me. Respect each platform's terms and anti-spam rules (rate limits, opt-out, domain warm-up).
+
+=== WHAT I NEED FROM YOU FIRST ===
+Ask me for anything missing, then STOP and propose a plan before executing:
+1. My ICP: what niche/type of creator, what size (follower range), what platforms, what geography.
+2. My offer and value pitch (usually: running UGC for them). If I do not have one tight, help me write it.
+3. Which channel to send on: email, Instagram, or both.
+4. Credentials/keys available: ScrapeCreators API, Origami, Instantly / Apollo / growth-machine (email), Unipile and/or Northlight (Instagram), plus where to store the leads (CSV / sheet / db).
+
+=== PHASE 1 — SOURCE CREATORS (use several sources; each finds creators the others miss) ===
+- ScrapeCreators API: pull creator profiles + bios at scale (bios often contain the business email).
+- Origami (https://origami.chat/?ref=partner-personal-Gul0fK): find creators in bulk and resolve accounts to emails.
+- Regex trick: once you have scraped bios/descriptions, run an email regex over the text to extract every address in one pass — cheapest enrichment there is.
+- Instagram Creator Marketplace: a long-term source if I submit an app and get the right permissions — flag it and help me set it up if I want the durable channel.
+Deliver a deduped list of candidate creators with handles + any data scraped.
+
+=== PHASE 2 — ENRICH INTO CONTACTS ===
+- Run the accounts through Origami to resolve emails.
+- Parse the ScrapeCreators bios for emails: apply the regex over the CSV, and/or read every description yourself and pull out contacts.
+- End state: a clean CSV of emails (for email outreach) and/or a list of Instagram handles/URLs (for IG outreach), deduped, with name + handle + source.
+
+=== PHASE 3 — SEND AT SCALE ===
+- EMAIL: send via Instantly (my top pick — most reliable for large lists), or Apollo sequences, or a growth-machine setup. Warm up domains, keep per-inbox volume sane, personalize enough to avoid spam folders, and set follow-ups.
+- INSTAGRAM: send programmatically from my account via Unipile over the API, or via Northlight using my logged-in session. Note there is no great IG outbound sequencer, so pace sends to look human and stay under limits.
+
+=== PHASE 4 — MESSAGING ===
+- Write the outreach from my value pitch (lead with what is in it for the creator, why me, why now). Produce a short A/B set of variants per channel; keep them human, not templated-spammy.
+
+=== PHASE 5 — TRACK WHO SAYS YES ===
+- Stand up a dashboard that tracks sent -> replied -> positive ("yes"). Positive-reply rate is the number that matters, not volume sent.
+- Use it to decide what to fix next: the list/targeting (top of funnel), the channel, or the pitch. Tune until the yes-rate climbs, then pour more volume into what works.
+
+Start now by asking me for the context in the first section, then propose the plan.`,
+  },
 }
 
 export function getAgentGuide(slug: string): AgentGuide | null {
