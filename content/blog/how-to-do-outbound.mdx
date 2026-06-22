@@ -12,7 +12,7 @@ seo:
 
 # How to Do Creator Outbound
 
-**Quick answer:** Creator outbound is one pipeline: source creators, enrich them into contact info, send at scale, and track who says yes. Source from four places — the ScrapeCreators API, Origami, a regex trick for pulling contacts out of bios, and the Instagram Creator Marketplace. Enrich by running those accounts through Origami (or parsing their bios) until you have a CSV of emails or a list of Instagram handles. Then send: email goes through Instantly (the most reliable for me), Apollo, or a growth-machine setup; Instagram goes through Unipile or Northlight over your own account. The whole thing lives or dies on lead sourcing and a clear value pitch, so spend your time there.
+**Quick answer:** Creator outbound is one pipeline: source creators, enrich them into contact info, send at scale, track who says yes, and scale the winners. Source from four places — the ScrapeCreators API, Origami, the free Google + regex trick (`site:instagram.com "@gmail.com" + {keyword}`), and the Instagram Creator Marketplace. Enrich by running accounts through Origami or parsing bios until you have a CSV, then verify it with MillionVerifier. Send: email through Instantly (the most reliable for me), Apollo, or a growth-machine setup; Instagram through Unipile or Northlight over your own account. Track the yes-rate and content performance, then put your best performers on retainer and run paid ad spend behind their winning posts. The whole thing lives or dies on lead sourcing and a clear value pitch, so spend your time there.
 
 The entire game comes down to finding leads. Everything after that — enrichment, sending, tracking — is plumbing you set up once. So most of this guide is about where the leads come from.
 
@@ -24,6 +24,7 @@ The entire game comes down to finding leads. Everything after that — enrichmen
 - [Step 3: Send at scale](#step-3-send-at-scale)
 - [Step 4: Messaging and the pitch](#step-4-messaging-and-the-pitch)
 - [Step 5: Track who says yes](#step-5-track-who-says-yes)
+- [Step 6: Scale the winners](#step-6-scale-the-winners)
 
 ---
 
@@ -46,7 +47,7 @@ There are four sources I lean on. Use more than one — each surfaces creators t
 
 **Origami.** Great for finding creators in bulk, and for turning a pile of accounts into emails (more on that below). It is the tool I reach for to go from "a list of handles" to "a list of people I can actually contact." (Here is my link: [origami.chat](https://origami.chat/?ref=partner-personal-Gul0fK).)
 
-**A regex trick.** This is a tip I picked up on Twitter, and it is a genuinely good way to scrape people. Once you have scraped a batch of bios or descriptions, run a regex over the text to pull out every email address in one pass. The same idea works on any blob of profile text you can get your hands on — let the pattern do the extraction instead of eyeballing it. It is the cheapest enrichment step there is.
+**The regex trick (the free one).** This is a tip I picked up on Twitter, and it is the best free lead source there is: you can scrape millions of creator emails straight out of Google. Run a Google search like `site:instagram.com "@gmail.com" + {keyword}` — swap `{keyword}` for your niche — page through the results, and run an email regex over the page text to pull every address in one pass. Instagram creators put their `@gmail.com` in their bio, Google has already indexed it, and this just harvests it. The same regex works on any blob of bios or descriptions you have scraped. It costs nothing and scales as far as the results go.
 
 **The Instagram Creator Marketplace.** I have not gone deep here yet, but it is worth flagging as a long-term play: if you submit an app and get granted the right permissions, the Creator Marketplace becomes another strong sourcing channel. It takes setup, so it only pays off if you are doing this seriously over time — but if you are, invest in it early.
 
@@ -58,8 +59,9 @@ Sourcing gives you accounts. Enrichment turns them into a CSV you can send to.
 
 - **Run the accounts through Origami** to find their emails. Drop in your list of handles and let it resolve the contacts. You come out the other side with a CSV of emails.
 - **Parse the bios you scraped.** Since ScrapeCreators hands you each creator's bio, you can parse those descriptions for emails directly — either with the regex pattern above on the CSV, or by handing the whole CSV to Claude Code and having it read every description and pull out the contacts. This is fast and catches the emails creators hide in plain sight.
+- **Verify before you send.** Run the list through an email verifier like MillionVerifier to drop dead and risky addresses. This is not optional — sending to a dirty list tanks your deliverability and burns your domains. Verify first, every time.
 
-The end state is one of two things: a big CSV of emails (if you are going after them over email) or a list of Instagram handles/URLs (if you are going after them on Instagram).
+The end state is one of two things: a big, verified CSV of emails (if you are going after them over email) or a list of Instagram handles/URLs (if you are going after them on Instagram).
 
 ## Step 3: Send at scale
 
@@ -71,7 +73,7 @@ How you send depends on which contact you ended up with.
 - **Apollo sequences** — solid for sequencing and follow-ups.
 - **A growth-machine setup** — another route for bulk sending.
 
-Whatever you pick, mind deliverability: warm up your domains, keep volume sane per inbox, and personalize enough that you are not flagged as spam.
+Whatever you pick, mind deliverability: warm up your domains, keep volume sane per inbox, and personalize enough that you are not flagged as spam. And automate the operations: have an agent manage the Instantly API and inbox (Uninbox or similar) so launching campaigns, rotating inboxes, and triaging replies runs without you babysitting it.
 
 **Instagram.** If you are reaching out over Instagram instead, connect your account and send programmatically:
 
@@ -84,8 +86,20 @@ Be honest about the state of the tooling here: there is not a great Instagram ou
 
 The offer in creator outbound is usually running UGC — you are pitching creators on making content. That part you either already understand or you do not, and no tool fixes a weak offer. Lead with the value: what is in it for them, why you, and why now. The sourcing and sending machinery only matters if the message lands.
 
+When a creator replies, ask for their post costs up front and work with the cheapest ones first. Early on you are buying data, not betting on any single creator, so keep the per-post cost low and spread it across as many as you can. You find your winners by volume, not by paying up for one name.
+
 ## Step 5: Track who says yes
 
 Build a dashboard that tracks how many people actually say yes. Volume sent is vanity; replies and positive replies are the number that matters. Watching that rate is what tells you whether to fix the list, the channel, or the pitch — the same loop as any other funnel. Tune the top (better sourcing, tighter targeting) and the message until the yes-rate climbs, then pour more volume into what works.
 
-That is the whole system: source from several places, enrich into a clean CSV, send over email or Instagram at scale, and track the yes-rate so you know what to improve. Get sourcing and the pitch right, and the rest runs on autopilot.
+Once creators are actually posting for you, track the content's performance too — something like Shortimize or viral.app to see which creators and which posts actually move numbers. Replies tell you the outreach works; this tells you the creators work.
+
+## Step 6: Scale the winners
+
+This is where the money is made. Most creators will be mediocre; a few will pop. Use the performance data to find them, then concentrate:
+
+- **Put your best performers on retainer** so you have a reliable, repeatable content engine instead of one-off posts.
+- **Put paid ad spend behind the best-performing content.** A post that already performed organically is the safest creative to run as an ad.
+- **Push for the cheapest CPM you can get.** Once you are paying to amplify, the whole game is efficiency — the lower your cost per thousand impressions, the more reach every dollar buys.
+
+That is the whole system: source from several places (the free Google + regex trick scales the furthest), verify, send over email or Instagram at scale, track the yes-rate and the content performance, then put your winners on retainer and pour paid spend behind them at the lowest CPM you can find. Get sourcing and the pitch right, and the rest runs on autopilot. gl hf.
