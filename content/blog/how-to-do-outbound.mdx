@@ -1,0 +1,91 @@
+---
+title: "How to Do Creator Outbound: Sourcing and Reaching Influencers at Scale (2026)"
+description: "How I run creator/influencer outbound end to end — scraping leads with ScrapeCreators, Origami, regex, and the Creator Marketplace, enriching to emails, then sending at scale over email and Instagram."
+publishedAt: 2026-06-21
+author: Austin Kennedy
+tags: ["Outbound", "Growth", "Lead Generation", "Creators", "Cold Email"]
+featured: false
+seo:
+  metaTitle: "How to Do Creator Outbound at Scale — Sourcing + Cold Outreach (2026) | Austin Kennedy"
+  metaDescription: "The full creator outbound playbook: source leads with ScrapeCreators, Origami, regex, and the Creator Marketplace, enrich to emails, and send at scale over email and Instagram."
+---
+
+# How to Do Creator Outbound
+
+**Quick answer:** Creator outbound is one pipeline: source creators, enrich them into contact info, send at scale, and track who says yes. Source from four places — the ScrapeCreators API, Origami, a regex trick for pulling contacts out of bios, and the Instagram Creator Marketplace. Enrich by running those accounts through Origami (or parsing their bios) until you have a CSV of emails or a list of Instagram handles. Then send: email goes through Instantly (the most reliable for me), Apollo, or a growth-machine setup; Instagram goes through Unipile or Northlight over your own account. The whole thing lives or dies on lead sourcing and a clear value pitch, so spend your time there.
+
+The entire game comes down to finding leads. Everything after that — enrichment, sending, tracking — is plumbing you set up once. So most of this guide is about where the leads come from.
+
+## Table of Contents
+
+- [The pipeline](#the-pipeline)
+- [Step 1: Source creators](#step-1-source-creators)
+- [Step 2: Enrich into contacts](#step-2-enrich-into-contacts)
+- [Step 3: Send at scale](#step-3-send-at-scale)
+- [Step 4: Messaging and the pitch](#step-4-messaging-and-the-pitch)
+- [Step 5: Track who says yes](#step-5-track-who-says-yes)
+
+---
+
+## The pipeline
+
+Four stages, in order:
+
+1. **Source** — build a big list of creators that fit your target.
+2. **Enrich** — turn those accounts into reachable contacts (emails or handles).
+3. **Send** — message all of them at scale, over email or Instagram.
+4. **Track** — measure who replies and who says yes, so you can tune the top of the funnel.
+
+If sourcing and enrichment are strong, the rest is a numbers game.
+
+## Step 1: Source creators
+
+There are four sources I lean on. Use more than one — each surfaces creators the others miss.
+
+**The ScrapeCreators API.** This is the workhorse. You can pull a lot of creator data out of it programmatically — profiles, follower counts, and crucially their bios. Bios are where a lot of creators put their business email, so scraping them at scale gives you both the lead and, often, the contact in one shot.
+
+**Origami.** Great for finding creators in bulk, and for turning a pile of accounts into emails (more on that below). It is the tool I reach for to go from "a list of handles" to "a list of people I can actually contact." (Here is my link: [origami.chat](https://origami.chat/?ref=partner-personal-Gul0fK).)
+
+**A regex trick.** This is a tip I picked up on Twitter, and it is a genuinely good way to scrape people. Once you have scraped a batch of bios or descriptions, run a regex over the text to pull out every email address in one pass. The same idea works on any blob of profile text you can get your hands on — let the pattern do the extraction instead of eyeballing it. It is the cheapest enrichment step there is.
+
+**The Instagram Creator Marketplace.** I have not gone deep here yet, but it is worth flagging as a long-term play: if you submit an app and get granted the right permissions, the Creator Marketplace becomes another strong sourcing channel. It takes setup, so it only pays off if you are doing this seriously over time — but if you are, invest in it early.
+
+There are almost certainly lead sources I do not know about. But between ScrapeCreators, Origami, the regex trick, and the Creator Marketplace, you can build a large list fast.
+
+## Step 2: Enrich into contacts
+
+Sourcing gives you accounts. Enrichment turns them into a CSV you can send to.
+
+- **Run the accounts through Origami** to find their emails. Drop in your list of handles and let it resolve the contacts. You come out the other side with a CSV of emails.
+- **Parse the bios you scraped.** Since ScrapeCreators hands you each creator's bio, you can parse those descriptions for emails directly — either with the regex pattern above on the CSV, or by handing the whole CSV to Claude Code and having it read every description and pull out the contacts. This is fast and catches the emails creators hide in plain sight.
+
+The end state is one of two things: a big CSV of emails (if you are going after them over email) or a list of Instagram handles/URLs (if you are going after them on Instagram).
+
+## Step 3: Send at scale
+
+How you send depends on which contact you ended up with.
+
+**Email.** If you have a CSV of emails, send it. Options:
+
+- **Instantly** — this is my top pick. It has been the most reliably successful for me when reaching out to a large list of emails. If you only set up one, set up this one.
+- **Apollo sequences** — solid for sequencing and follow-ups.
+- **A growth-machine setup** — another route for bulk sending.
+
+Whatever you pick, mind deliverability: warm up your domains, keep volume sane per inbox, and personalize enough that you are not flagged as spam.
+
+**Instagram.** If you are reaching out over Instagram instead, connect your account and send programmatically:
+
+- **Unipile** — use it over the API to send messages from your account at scale. This is how I do Instagram outreach programmatically.
+- **Northlight** — connect your account and message through your own logged-in session.
+
+Be honest about the state of the tooling here: there is not a great Instagram outbound sequencer the way there is for email. The Unipile/Northlight route over your own account is the best autopilot setup I have found.
+
+## Step 4: Messaging and the pitch
+
+The offer in creator outbound is usually running UGC — you are pitching creators on making content. That part you either already understand or you do not, and no tool fixes a weak offer. Lead with the value: what is in it for them, why you, and why now. The sourcing and sending machinery only matters if the message lands.
+
+## Step 5: Track who says yes
+
+Build a dashboard that tracks how many people actually say yes. Volume sent is vanity; replies and positive replies are the number that matters. Watching that rate is what tells you whether to fix the list, the channel, or the pitch — the same loop as any other funnel. Tune the top (better sourcing, tighter targeting) and the message until the yes-rate climbs, then pour more volume into what works.
+
+That is the whole system: source from several places, enrich into a clean CSV, send over email or Instagram at scale, and track the yes-rate so you know what to improve. Get sourcing and the pitch right, and the rest runs on autopilot.
