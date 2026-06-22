@@ -101,25 +101,35 @@ Ask me for anything missing, then STOP and propose a plan before executing:
 === PHASE 1 — SOURCE CREATORS (use several sources; each finds creators the others miss) ===
 - ScrapeCreators API: pull creator profiles + bios at scale (bios often contain the business email).
 - Origami (https://origami.chat/?ref=partner-personal-Gul0fK): find creators in bulk and resolve accounts to emails.
-- Regex trick: once you have scraped bios/descriptions, run an email regex over the text to extract every address in one pass — cheapest enrichment there is.
+- Regex trick (the free one, scales furthest): scrape creator emails straight from Google. Run searches like site:instagram.com "@gmail.com" + {keyword} (swap {keyword} for the niche), page through results, and run an email regex over the page text to extract every address. Same regex works on any scraped bios.
 - Instagram Creator Marketplace: a long-term source if I submit an app and get the right permissions — flag it and help me set it up if I want the durable channel.
 Deliver a deduped list of candidate creators with handles + any data scraped.
 
 === PHASE 2 — ENRICH INTO CONTACTS ===
 - Run the accounts through Origami to resolve emails.
 - Parse the ScrapeCreators bios for emails: apply the regex over the CSV, and/or read every description yourself and pull out contacts.
-- End state: a clean CSV of emails (for email outreach) and/or a list of Instagram handles/URLs (for IG outreach), deduped, with name + handle + source.
+- VERIFY the list with an email verifier (e.g. MillionVerifier) and drop dead/risky addresses BEFORE sending — a dirty list tanks deliverability and burns domains.
+- End state: a clean, verified CSV of emails (for email outreach) and/or a list of Instagram handles/URLs (for IG outreach), deduped, with name + handle + source.
 
 === PHASE 3 — SEND AT SCALE ===
 - EMAIL: send via Instantly (my top pick — most reliable for large lists), or Apollo sequences, or a growth-machine setup. Warm up domains, keep per-inbox volume sane, personalize enough to avoid spam folders, and set follow-ups.
+- Automate the ops: manage the Instantly API and inbox programmatically (Uninbox or similar) — launch campaigns, rotate inboxes, and triage replies without manual babysitting.
 - INSTAGRAM: send programmatically from my account via Unipile over the API, or via Northlight using my logged-in session. Note there is no great IG outbound sequencer, so pace sends to look human and stay under limits.
 
 === PHASE 4 — MESSAGING ===
 - Write the outreach from my value pitch (lead with what is in it for the creator, why me, why now). Produce a short A/B set of variants per channel; keep them human, not templated-spammy.
+- When creators reply, ask for their post costs and work with the cheapest first. Early on you are buying data across many creators, not betting on one — keep per-post cost low and spread it wide.
 
 === PHASE 5 — TRACK WHO SAYS YES ===
 - Stand up a dashboard that tracks sent -> replied -> positive ("yes"). Positive-reply rate is the number that matters, not volume sent.
+- Once creators are posting, also track content performance (e.g. Shortimize or viral.app) to see which creators and posts actually move numbers.
 - Use it to decide what to fix next: the list/targeting (top of funnel), the channel, or the pitch. Tune until the yes-rate climbs, then pour more volume into what works.
+
+=== PHASE 6 — SCALE THE WINNERS ===
+- Most creators are mediocre; a few pop. Use the performance data to find them, then concentrate spend.
+- Put best performers on retainer for a repeatable content engine.
+- Put paid ad spend behind the best-performing content (organic winners are the safest ad creative).
+- Push for the cheapest CPM you can get — once you are paying to amplify, the game is efficiency.
 
 Start now by asking me for the context in the first section, then propose the plan.`,
   },
