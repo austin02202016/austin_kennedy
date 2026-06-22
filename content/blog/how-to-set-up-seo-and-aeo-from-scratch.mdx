@@ -1,0 +1,188 @@
+---
+title: "How to Set Up SEO and AEO From Scratch: The Full Playbook (2026)"
+description: "A start-to-finish playbook for taking a website with zero SEO/AEO to ranking and getting cited by AI. The exact stack, keyword math, and win loop I use — with a real greenfield case study (Herbert)."
+publishedAt: 2026-06-21
+author: Austin Kennedy
+tags: ["SEO", "AEO", "GEO", "Growth", "DataForSEO", "AI Visibility", "Engineering"]
+featured: true
+seo:
+  metaTitle: "How to Set Up SEO and AEO From Scratch — The Full Playbook (2026) | Austin Kennedy"
+  metaDescription: "Take a website from zero SEO/AEO to ranking and getting cited by AI. The exact tooling, keyword math, and iterative win loop, with a real greenfield case study."
+---
+
+# How to Set Up SEO and AEO From Scratch
+
+**Quick answer:** Setting up SEO and AEO on a site that has neither is four jobs done in order. First, stand up the tooling: a cheap VM, a DataForSEO key, Claude Code with the SEO skills, Screaming Frog, Google Search Console, and PostHog. Second, choose 150 to 500 keywords by scraping your competitors and scoring each one for volume, difficulty, value, and how winnable it is. Third, win those keywords on four fronts: technicals, content, authority, and citations. Fourth, measure the funnel in Search Console and run an iterative loop that pushes ranking pages higher and converts the traffic. SEO is a three-month game, not a three-day one, but the work is fully systematizable.
+
+Most people treat SEO as something you sprinkle on at the end. It is the opposite. It is an engineering problem with a data spine, a build phase, and a measurement loop, and once you see it that way you can run the whole thing like a pipeline. This is the playbook I actually use. I will thread a real example through it: **Herbert**, a brand-new finance app I set up SEO and AEO for from a completely cold domain.
+
+## Table of Contents
+
+- [Why organic search is worth real money](#why-organic-search-is-worth-real-money)
+- [The mental model: choose, win, convert](#the-mental-model-choose-win-convert)
+- [Step 0: Set up your tooling](#step-0-set-up-your-tooling)
+- [Step 1: Choose your keywords](#step-1-choose-your-keywords)
+- [Step 2: Win — technicals](#step-2-win-technicals)
+- [Step 2: Win — content](#step-2-win-content)
+- [Step 2: Win — authority](#step-2-win-authority)
+- [Step 2: Win — citations and AEO](#step-2-win-citations-and-aeo)
+- [Step 3: Measure and convert](#step-3-measure-and-convert)
+- [Step 4: Turn it into a loop](#step-4-turn-it-into-a-loop)
+
+---
+
+## Why organic search is worth real money
+
+Start with how a keyword has a dollar value, because that is what justifies the whole effort.
+
+There are two ways to show up for a search: paid and organic. Paid is Google Ads. You bid on a keyword and agree to pay per click. If the keyword is competitive, that click can cost real money. I have watched companies pay something like fifty dollars for a single click on a high-intent term, and they do it because that click converts. The danger of paid is that competitors can bid on *your* brand name and appear above you for your own term, which quietly bleeds you.
+
+Organic is the other side: you rank for free because Google decided your page is the best answer. Here is why that is worth investing in. If the market rate for a keyword is fifty dollars a click, and a hundred people search it every month, then ranking number one for that keyword organically is worth roughly five thousand dollars a month in traffic you would otherwise have to buy. Do that across a list of a few hundred keywords and the math gets serious fast.
+
+That is also exactly how you derive the value of an SEO engagement. You pick 150 to 500 keywords you believe will bring revenue, pull the cost-per-click and the search volume for each one (Google Ads gives you CPC, DataForSEO gives you both volume and difficulty), and you can put a defensible dollar figure on the organic traffic you are building. Volume times value, summed across your list, over time. That number is the entire reason SEO is worth doing.
+
+## The mental model: choose, win, convert
+
+The whole campaign is three phases:
+
+1. **Choose** the keywords you want to rank for.
+2. **Win** them.
+3. **Convert** the traffic they bring.
+
+Winning a keyword comes down to four levers, and you pull all of them:
+
+- **Technicals** — can Google actually crawl and understand your site.
+- **Content** — do you have a page that genuinely answers the query.
+- **Authority** — does your domain have enough weight to outrank the others.
+- **Citations (AEO)** — are you structured so AI engines quote you in their answers.
+
+Keywords are not a fifth lever. They are the scoreboard. Google Search Console tells you which keywords you are ranking for, at what position, and how that is trending. That feedback is what drives the loop in step three.
+
+---
+
+## Step 0: Set up your tooling
+
+Before you touch keywords, stand up the stack. This is what lets you run SEO like a pipeline instead of doing it by hand.
+
+**A VM.** Get a small cloud server. I use Linode (by Akamai) — it is cheap, fast, and gets out of the way. The VM is where your agents, crons, and tools run without depending on your laptop being open. You will use it to run scheduled jobs that publish content, re-check rankings, and run audits on a daily cadence.
+
+**A DataForSEO key.** This is the data spine of the whole operation. DataForSEO is an API that exposes search volume, keyword difficulty, CPC, live SERPs, ranked-keyword lists for any domain, backlink profiles, and on-page audits — each as its own endpoint. Almost every decision below is downstream of a DataForSEO call. Get the key first.
+
+**Claude Code and the SEO skills.** I run the analysis and content through Claude Code. There is a set of SEO skills (keyword research, SERP analysis, technical audits, backlinks, GEO/AEO, content briefs, schema) that wrap the DataForSEO endpoints and give the agent the right context for each job. Lean on those skills rather than calling raw endpoints from memory — they encode the workflow.
+
+**Screaming Frog.** This is how you audit technicals. It is essentially a Chromium-based crawler that walks your whole site and shows you every network request, load time, redirect, and broken bit of structured data — like devtools' inspect, but for the entire site at once. Even better, you can run it as a local MCP server and point Claude at it: "crawl this site and tell me everything that is technically wrong." It runs on your machine, so there is nothing to deploy.
+
+**Google Search Console and GA4.** Set these up on day one, even before you have content, because Search Console only starts logging impressions and positions once it is connected and your sitemap is submitted. GA4 picks up the downstream behavior Search Console does not store (site visits, events, conversions).
+
+**PostHog.** For session replays on your landing and blog pages. When you eventually get traffic but it is not converting, replays show you exactly where people bail.
+
+> **Herbert, day zero.** Herbert is a brand-new finance app on a cold domain — zero organic footing, every keyword a gap. The one gotcha worth flagging: the domain was not yet verified in Search Console, so until that was done I ran all keyword and SERP targeting off DataForSEO alone. That is fine. DataForSEO does not need your site to be connected to anything — it sees the whole market. Search Console only matters once you have pages live and want to watch them.
+
+## Step 1: Choose your keywords
+
+This is where most of the leverage is. A good list makes everything downstream easier; a bad one wastes months.
+
+**Find your competitors.** Ask Claude to map them, and confirm with data. DataForSEO has competitor endpoints that return the domains ranking for the same terms you want — that surfaces rivals you did not know you had.
+
+**Scrape what they rank for.** For each competitor, pull their ranked keywords from DataForSEO (the ranked-keywords and keywords-for-site endpoints). Now you have a raw pool of everything your market is winning on, with volume, difficulty, and CPC attached to each term.
+
+**Build the master list.** Distill that pool down to 150 to 500 keywords. Score every candidate on four things:
+
+- **Volume** — how many people search it per month.
+- **Difficulty (KD)** — DataForSEO's 0 to 100 score for how hard it is to rank. New sites should lead with low KD.
+- **Value (CPC)** — high CPC means the term converts; that is the market pricing intent for you.
+- **Winnability** — be honest about whether you can realistically take it given your domain's current authority.
+
+You want a mix of winnable, high-value, and high-volume. Not all three in every term — a portfolio. Some cheap, low-KD terms you will win in weeks; a few head terms you will chase for a year.
+
+**Decide your wedge.** Before you write anything, know the one angle that makes you the better answer. This shapes every page.
+
+> **Herbert's keyword build.** I ran a live DataForSEO pull (a small script, `analyze-herbert-keywords.mjs`, that hits the keyword and SERP endpoints) to get real volume, KD, CPC, and year-over-year trend for every candidate. The wedge: every competitor is a *reactive dashboard you have to remember to open*; Herbert is *proactive and texts you*, free and read-only. With that wedge fixed, the lead cluster picked itself — competitor-capture terms with the lowest difficulty and highest intent: `truebill` (KD 1), `rocket money alternative` (KD 4), `copilot money` (KD 11, up 49% year over year). Then a second tier of subscription and cashback listicles, then a high-KD HYSA cluster reserved for AEO answers rather than ranking. I bucketed the whole list and locked a first-twelve article plan. The rule throughout: do not try to outrank a competitor's own homepage on its bare brand name — win the "alternative," "vs," and "is it worth it" slots, which are low-KD and high-purchase-intent.
+
+---
+
+## Step 2: Win — technicals
+
+Technicals are nothing to do with content. They are whether Google can crawl and understand your site at all, and they are the single biggest part of getting off the ground. If the crawler cannot read you, nothing else matters.
+
+The basics:
+
+- **`sitemap.xml`** — the library card of every page you have. Google's crawler reads it first. No sitemap, and as far as the crawler is concerned there is nothing there.
+- **`robots.txt`** — tells crawlers (including AI crawlers) what they can access. It matters for both SEO and AI citations.
+- **Server-side rendering.** If your content only appears after client-side JavaScript runs, crawlers may never see it. Render on the server so the words are in the HTML.
+- **Canonicalization.** Make sure one canonical version of each URL exists and everything redirects to it.
+
+That last one is worth a real warning, because I have watched it quietly wreck a site. On Payout, an app I took over, `www` and the bare domain were not redirecting to each other, so Google was treating them as two separate sites — splitting the domain authority and making everything harder to scale. One of the first fixes was forcing a clean redirect so there was a single site again. A second lesson from the same site: do not put unverified claims in your markup (an inflated review count, for example). Google will manually review it and ding you. Keep it honest and keep it consistent.
+
+The fastest way to find all of this is Screaming Frog. Crawl the site, or point Claude at the Screaming Frog MCP server, and have it report every redirect chain, render issue, broken schema, and slow page. Fix those before you write a single blog post.
+
+## Step 2: Win — content
+
+Content is the next lever — anything made of words or images on your site. Blogs are the obvious form, but they are not the only one.
+
+**Cluster about five keywords per page.** Your master list becomes pages. One blog targets a tight cluster of around five related keywords; the next blog targets another five; a tool page targets another. Do not write one page per keyword and do not stuff thirty unrelated terms into one page.
+
+**Build more than blogs.** Blogs work, but people skim them (often just to copy a paragraph into a chatbot). Interactive things hold attention and rank because they are genuinely more useful: free tools, calculators, and databases. On Payout I built a savings calculator and a class-action-lawsuit database — not because calculators have some magic SEO property, but because a page titled "calculate how much you can save" is a more compelling result for a human to click than another article. Little products and tools earn links and attention that blogs do not.
+
+**Small details that compound.** Put the year in time-sensitive titles ("...in 2026") — Google reads it as fresh and tends to favor it. Lead with a direct answer. Write for the person, not the crawler.
+
+**Internal linking.** This is how authority moves through your site. Think of your homepage as a pool of domain authority. When you link from the homepage to a new blog post, that post inherits some of the pool. So link your most recent and most important posts from the homepage and from each other. A new post with no internal links pointed at it starts from nothing.
+
+## Step 2: Win — authority
+
+Authority is your domain's weight, usually expressed as a Domain Rating or Domain Authority score. It is why chase.com would outrank a brand-new blog publishing the identical article word for word. A new domain starts near zero.
+
+**The only thing that moves it is backlinks** — other websites linking to you. More links, from higher-authority sites, raise your score. (Traffic alone does not directly move it; do not count on a viral day to lift your domain.) And it is both quantity and quality: a link from a DA-99 site is worth far more than a hundred links from DA-zero sites.
+
+Ways to earn backlinks, roughly from easy to hard:
+
+- **Startup directories.** Product Hunt, Crunchbase, Trustpilot, G2, and the long tail of launch directories. These are the lowest-hanging fruit. There are hundreds; you can have agents work through a list.
+- **Reddit and forums.** A genuinely useful post that links your site.
+- **A Chrome extension or small free product** that links back to your main site from a high-authority marketplace.
+- **PR and press.** Cold-email journalists and newsletters to write about you. Each placement is a strong backlink. This scales surprisingly well with good outbound.
+
+To prioritize, work backward from the people already beating you. Use a tool like Origami (origami.chat) or the DataForSEO backlinks endpoint to pull the backlink profile of any competitor ranking above you — every site linking to them. Those same sites are your outreach list: email them and ask for the link. You are not guessing where links come from; you are copying a proven map.
+
+## Step 2: Win — citations and AEO
+
+AEO — Answer Engine Optimization — is making sure AI engines (ChatGPT, Perplexity, Google's AI answers, Claude) quote you. In practice it overlaps heavily with content, with one twist: structure for answers.
+
+- Write **quick answers and FAQs** into your pages: "What does X do?", "How does X work?", "Is X worth it?" When someone asks an AI that question, a page that answers it cleanly and directly is what gets cited.
+- Lead each page with a direct, self-contained answer before the long version, so an engine can lift it.
+- Keep `robots.txt` open to AI crawlers and consider an `llms.txt` so they can find your best content.
+
+The "alternative," "vs," and "is it worth it" pages from your keyword list double as your strongest AEO surface — they are exactly the questions people ask AI, and they let you state your wedge plainly.
+
+---
+
+## Step 3: Measure and convert
+
+Once pages are live, Search Console is your scoreboard. Read it as a funnel:
+
+1. **Impressions** — how often you appear in results at all, even at position 90.
+2. **Clicks** — how often someone actually clicks through. This is what you optimize for, and it is heavily driven by position: the top few results get nearly all the clicks. Anything on page two or three effectively gets none.
+3. **Average position** — where you rank on average. Search Console also gives you click-through rate.
+
+Search Console only stores impressions, clicks, position, and CTR. The rest of the funnel — site visits, time on page, and call-to-action clicks — lives in GA4 and PostHog.
+
+**The core loop is the SERP teardown.** When a page starts ranking but is stuck (say position 30), pull the top results above you for that keyword and, for each one, grab two things: their content and their domain authority. Two outcomes:
+
+- **Someone outranks you with a *lower* domain authority.** That means it is a content problem. Study how they use the keyword and structure the page, and improve yours to match or beat it.
+- **Everyone above you has a *higher* domain authority.** That means it is an authority problem. The content is fine; you need more backlinks to that page. Go back to step two's authority work.
+
+That decision — content problem or authority problem — is the whole game, and it is fully automatable. You can SERP the results, scrape content and DA, and have an agent tell you which lever to pull, then do it.
+
+**Converting the traffic.** Clicks and site visits are worth nothing if no one acts. This is where PostHog and GA4 earn their keep. Use PostHog session replays on your blog pages to watch where visitors drop off, and GA4 to see how far down they scroll and how long they stay.
+
+On call-to-action placement, what works for me: one CTA about a third of the way in (or right after the intro) and one at the end; for a long post, add a third in the middle. If you are getting clicks and site visits but no CTA clicks, the problem is usually one of three things: the content is not good enough to earn the action, the design is getting in the way, or — most commonly — you are ranking for keywords that are irrelevant to what you sell, so the visitors were never the right people. Irrelevant rankings produce traffic that will never convert, and that is a keyword-selection problem, not a copy problem.
+
+## Step 4: Turn it into a loop
+
+SEO compounds, and it is slow — think three months before you can really judge a campaign, not three days. So the goal is to make the work a standing loop rather than a one-time push:
+
+- Publish a new clustered page on a cadence (a daily cron on your VM works well).
+- Improve existing pages that are ranking but stuck, using the SERP teardown to decide content-vs-authority each time.
+- Keep earning backlinks — directories, then outreach to your competitors' linkers, then press.
+- Watch the Search Console funnel weekly and let it tell you what to work on next.
+
+That is the entire system: stand up the tooling, choose the right keywords, win them on technicals, content, authority, and citations, then measure and iterate until the rankings — and the conversions — climb. None of it is mysterious once you treat it as a pipeline, and almost all of it can run on a schedule while you focus on the few judgment calls that actually move the needle.
