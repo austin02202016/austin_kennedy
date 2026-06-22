@@ -14,7 +14,22 @@ export const POST_GATE_PASSWORD =
     ? envPassword
     : "DOLPHIN"
 
-export const PROTECTED_POST_SLUGS = new Set<string>(["how-to-do-outbound"])
+// Additional accepted passwords beyond POST_GATE_PASSWORD. Any of these unlocks
+// a gated post. Comparison is case-insensitive (see isValidPostPassword).
+const EXTRA_POST_GATE_PASSWORDS = ["Origami"]
+
+export function isValidPostPassword(entered: string): boolean {
+  const normalized = entered.trim().toLowerCase()
+  if (normalized.length === 0) return false
+  return [POST_GATE_PASSWORD, ...EXTRA_POST_GATE_PASSWORDS].some(
+    (valid) => valid.toLowerCase() === normalized,
+  )
+}
+
+export const PROTECTED_POST_SLUGS = new Set<string>([
+  "how-to-do-outbound",
+  "how-to-set-up-seo-and-aeo-from-scratch",
+])
 
 export function isProtectedPost(slug: string): boolean {
   return PROTECTED_POST_SLUGS.has(slug)
