@@ -79,6 +79,12 @@ export default function HomePage() {
                 {">"} my thoughts (blog)
               </Link>
               <Link
+                href="/gtm-university"
+                className="block text-base text-zinc-900 hover:text-zinc-500 transition-colors"
+              >
+                {">"} gtm university (growth playbooks)
+              </Link>
+              <Link
                 href="/about"
                 className="block text-base text-zinc-900 hover:text-zinc-500 transition-colors"
               >
