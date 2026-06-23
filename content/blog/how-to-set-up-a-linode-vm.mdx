@@ -1,0 +1,176 @@
+---
+title: "How to Set Up a Linode VM: SSH In, Expose a Port, and Run an Agent (2026)"
+description: "A plain, start-to-finish guide to standing up a Linode cloud VM: create the instance, add your SSH key, SSH in with the IP, install your tooling, expose a port through the firewall, and run a coding agent on it with skip-permissions."
+publishedAt: 2026-06-23
+author: Austin Kennedy
+tags: ["Linode", "VM", "SSH", "DevOps", "Cloud", "Claude Code"]
+featured: false
+seo:
+  metaTitle: "How to Set Up a Linode VM — SSH, Expose a Port, Run an Agent (2026) | Austin Kennedy"
+  metaDescription: "Stand up a Linode cloud VM end to end: create the instance, add an SSH key, SSH in with the IP, install tooling, open a port, and run a coding agent with skip-permissions."
+---
+
+# How to Set Up a Linode VM
+
+**Quick answer:** Standing up a Linode VM is five steps. Create an account at linode.com and spin up a small shared instance (the $5/mo nano is plenty) on Ubuntu LTS in a nearby region. Add your SSH public key during creation so you can log in without a password. SSH in with `ssh root@YOUR_VM_IP`. Install whatever you need — Node, git, and a coding agent. Open the port you want to reach (e.g. 3000) in both the firewall on the box (`ufw`) and Linode's Cloud Firewall, then bind your app to `0.0.0.0` so it listens on the public IP. From there you can run an agent on the box — including with `--dangerously-skip-permissions` so it stops asking before every action — and it keeps working whether or not your laptop is open.
+
+This is the version of the guide that just sets up the actual machine. No SEO, no crons unless you want them — a VM you own, that you can SSH into and point things at.
+
+## Table of Contents
+
+- [Why a VM at all](#why-a-vm-at-all)
+- [Step 1: Create the Linode instance](#step-1-create-the-linode-instance)
+- [Step 2: SSH in with the IP](#step-2-ssh-in-with-the-ip)
+- [Step 3: First-login hardening](#step-3-first-login-hardening)
+- [Step 4: Install your tooling](#step-4-install-your-tooling)
+- [Step 5: Expose a port](#step-5-expose-a-port)
+- [Step 6: Run a coding agent on the box](#step-6-run-a-coding-agent-on-the-box)
+- [Keeping it running](#keeping-it-running)
+
+---
+
+## Why a VM at all
+
+A VM is a computer in the cloud that is always on. The point is that it does not depend on your laptop being open — you SSH into it, start something, close your laptop, and it keeps going. That is what makes it the right home for anything long-running: an agent, a scraper, a server, a scheduled job. You rent it by the month, you get full root access, and it has its own public IP address you can reach from anywhere.
+
+Linode (now Linode by Akamai) is what I use. It is cheap, the smallest plans are more than enough to start, and the dashboard is simple. Everything below works the same on any provider — DigitalOcean, Hetzner, AWS Lightsail — the names just change.
+
+## Step 1: Create the Linode instance
+
+1. Go to [linode.com](https://www.linode.com) and create an account.
+2. In the dashboard, click **Create → Linode**.
+3. **Distribution:** Ubuntu 24.04 LTS (any current LTS is fine).
+4. **Region:** pick the one physically closest to you for the lowest latency.
+5. **Plan:** under **Shared CPU**, the **Nano** ($5/mo) or a small shared plan is plenty for getting started. You can resize later.
+6. **Root password:** set a strong one (you will mostly use SSH keys, but Linode requires this).
+7. **SSH Keys:** this is the important one — add your public key now so you can log in without typing a password every time.
+
+To add your SSH key, you need a keypair on your own machine. If you do not already have one:
+
+```bash
+# On your laptop. Press enter through the prompts; optionally set a passphrase.
+ssh-keygen -t ed25519 -C "your-email@example.com"
+
+# Print the PUBLIC key and copy the whole line:
+cat ~/.ssh/id_ed25519.pub
+```
+
+Paste that public key into the **SSH Keys → Add A Key** box in the Linode create screen. Then click **Create Linode**.
+
+After a minute the instance boots and the dashboard shows its **public IP address** (something like `172.105.xx.xx`). That IP is how you reach the box — copy it.
+
+## Step 2: SSH in with the IP
+
+From your laptop's terminal, SSH in as `root` using that IP:
+
+```bash
+ssh root@YOUR_VM_IP
+```
+
+The first time, it asks you to confirm the host fingerprint — type `yes`. Because you added your SSH key, it logs you straight in with no password. You are now on the VM.
+
+> If it asks for a password instead of using your key, your public key did not get attached. Either re-add it in the dashboard, or copy it up manually with `ssh-copy-id root@YOUR_VM_IP`.
+
+A couple of quality-of-life touches so you are not retyping the IP:
+
+```bash
+# Add to ~/.ssh/config on your LAPTOP so you can just `ssh myvm`
+Host myvm
+  HostName YOUR_VM_IP
+  User root
+  IdentityFile ~/.ssh/id_ed25519
+```
+
+## Step 3: First-login hardening
+
+A fresh box is exposed to the public internet, so do the basics before anything else. Still SSH'd in:
+
+```bash
+# Update everything
+apt update && apt upgrade -y
+
+# (Optional but recommended) make a non-root user with sudo
+adduser austin
+usermod -aG sudo austin
+
+# Turn on the firewall, but ALLOW SSH first so you don't lock yourself out
+ufw allow OpenSSH
+ufw enable
+```
+
+The one rule that matters: **allow SSH before you enable the firewall.** If you enable `ufw` with no rules, the next thing it does is cut your own connection.
+
+## Step 4: Install your tooling
+
+Install whatever the box needs. A typical setup for running agents and small services:
+
+```bash
+# Node (via nvm) + git
+apt install -y git curl
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+source ~/.bashrc
+nvm install --lts
+
+# Verify
+node -v && git --version
+
+# Clone your repo
+git clone https://github.com/you/your-repo.git
+cd your-repo
+npm install
+```
+
+If you are running a coding agent on the box, install it the same way you would locally (for Claude Code: `npm install -g @anthropic-ai/claude-code`), then authenticate it once.
+
+## Step 5: Expose a port
+
+By default your VM only accepts SSH (port 22). To reach an app running on it — say a dev server on port `3000` — you have to open that port in **two** places and make the app listen publicly.
+
+**1. Bind the app to `0.0.0.0`, not `localhost`.** An app bound to `localhost`/`127.0.0.1` only accepts connections from the box itself, so you will never reach it from outside. Bind to `0.0.0.0` so it listens on the public interface:
+
+```bash
+# Example: Next.js dev server reachable from outside
+npm run dev -- -H 0.0.0.0 -p 3000
+# Many tools also honor: HOST=0.0.0.0 PORT=3000 npm start
+```
+
+**2. Open the port in the on-box firewall (`ufw`):**
+
+```bash
+ufw allow 3000/tcp
+ufw status        # confirm 3000 is listed
+```
+
+**3. Open the port in Linode's Cloud Firewall** (if you attached one — recommended): in the dashboard go to **Firewalls → your firewall → Inbound Rules → Add Rule**, allow **TCP** on port **3000** from the sources you want.
+
+> Tip: if you only want *yourself* to reach it, lock both firewalls down to your own IP instead of `0.0.0.0/0`. Find your IP at [ifconfig.me](https://ifconfig.me) and allow only that. Opening a port to the whole internet means anything on it is publicly reachable, so only expose what you mean to.
+
+Now `http://YOUR_VM_IP:3000` resolves to your app from anywhere.
+
+## Step 6: Run a coding agent on the box
+
+The reason to do all this is so an agent can run on the VM instead of your laptop. Once it is installed and authenticated, you can let it run without it stopping to ask permission before every file edit or command:
+
+```bash
+# Inside your repo on the VM
+claude --dangerously-skip-permissions
+```
+
+The `--dangerously-skip-permissions` flag tells the agent to stop prompting you for approval on each action — useful precisely because you are not sitting at the box babysitting it. The name is a warning, not a joke: the agent can now run commands and edit files unattended. Only use it on a machine you are fine with it having free rein over — which is the whole point of a throwaway-cheap VM that is isolated from your real laptop. Keep secrets in environment variables on the box, not hardcoded, and don't point a skip-permissions agent at anything you can't afford for it to change.
+
+## Keeping it running
+
+When you close your laptop, your SSH session ends — and anything you started in the foreground dies with it. To keep a process alive after you disconnect, run it under `tmux` (or `screen`):
+
+```bash
+apt install -y tmux
+tmux new -s work       # start a named session
+# ...run your agent/server in here...
+# detach with: Ctrl-b then d   — it keeps running
+
+tmux attach -t work    # reconnect later from anywhere
+```
+
+For something that should always be up (a real server, not an interactive agent), use a `systemd` service or `pm2` so it restarts on crash and on reboot. But for "start the agent, close the lid, check on it later," `tmux` is all you need.
+
+That is the whole thing: an always-on machine you reach by IP, with exactly the ports you chose open, running whatever you point it at — independent of your laptop.

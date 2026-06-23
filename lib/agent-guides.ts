@@ -13,6 +13,46 @@ export interface AgentGuide {
 }
 
 const agentGuides: Record<string, AgentGuide> = {
+  "how-to-set-up-a-linode-vm": {
+    intro:
+      "Paste this into Claude Code (or any coding agent) on your own machine. It will ask for your VM's IP and what you want to run, then walk you through (or do over SSH) the whole setup — SSH in, harden, install tooling, open the port you need, and start your process.",
+    prompt: `You are my VM setup engineer. Your job is to take a fresh Linode (or any) cloud VM from nothing to a working, always-on box I can reach by IP, with exactly the port(s) I want open, running whatever I point it at. Work step by step. At the start of each step, tell me what you are about to do and what you need from me. Never open a port wider than I ask for, and warn me before anything that could lock me out of SSH.
+
+=== WHAT I NEED FROM YOU FIRST ===
+Ask me for anything missing, then STOP and confirm the plan before executing:
+1. Do I already have a VM, or do I need to create one? If creating: I recommend Linode by Akamai — linode.com, Create → Linode, Ubuntu LTS, a Shared/Nano plan ($5/mo is plenty), region nearest me.
+2. The VM's public IP address, and whether I have an SSH keypair on this laptop (if not, generate one with ssh-keygen -t ed25519 and tell me to paste the .pub into Linode's SSH Keys field).
+3. What I want to run on the box (an agent, a server, a scraper, a scheduled job) and which port(s) it should expose, if any.
+4. Whether I want you to act over SSH directly (I give you access) or just hand me the exact commands to run.
+
+=== STEP 1 — SSH IN ===
+- Connect with: ssh root@MY_VM_IP. Confirm the key-based login works (no password prompt). If it asks for a password, the public key did not attach — help me fix it (ssh-copy-id) before continuing.
+- Offer to add a Host entry to my laptop's ~/.ssh/config so I can just 'ssh myvm'.
+
+=== STEP 2 — HARDEN ===
+- apt update && apt upgrade -y.
+- Optionally create a non-root sudo user.
+- Enable the firewall, but ALLOW SSH FIRST so we never lock ourselves out: ufw allow OpenSSH, then ufw enable. Call this out explicitly before running it.
+
+=== STEP 3 — INSTALL TOOLING ===
+- Install what the box needs for my use case (commonly: git, curl, Node via nvm). Clone my repo if I give one and run the install step.
+- If I am running a coding agent on the box, install and authenticate it.
+
+=== STEP 4 — EXPOSE THE PORT ===
+Only if I want a port reachable. Open it in BOTH places and bind the app publicly:
+- Bind my app to 0.0.0.0 (NOT localhost/127.0.0.1) on the chosen port, or it will never be reachable from outside.
+- On-box firewall: ufw allow PORT/tcp, then ufw status to confirm.
+- Linode Cloud Firewall (if attached): add an inbound TCP rule for PORT. If I only want myself to reach it, lock the source to my own IP (ifconfig.me) instead of 0.0.0.0/0 — tell me which I'm choosing and why.
+- Verify http://MY_VM_IP:PORT actually responds.
+
+=== STEP 5 — RUN IT AND KEEP IT ALIVE ===
+- Start my process. If it is a coding agent meant to run unattended, I may run it with --dangerously-skip-permissions so it stops asking before each action — explain that this gives it free rein on the box, so we only do it because the VM is cheap and isolated from my real laptop. Keep secrets in env vars, not hardcoded.
+- So it survives me closing my laptop: run it inside tmux (tmux new -s work, detach with Ctrl-b then d, reattach with tmux attach -t work). For something that must always be up, set up a systemd service or pm2 so it restarts on crash and reboot.
+- Confirm it keeps running after I disconnect.
+
+Start now by asking me for the context in the first section, then propose the plan.`,
+  },
+
   "how-to-set-up-seo-and-aeo-from-scratch": {
     intro:
       "Paste this into Claude Code (or any coding agent) with access to your site's repo. It will ask you a few questions, then set up your SEO and AEO end to end — tooling, keywords, on-page wins, and the measurement loop.",
