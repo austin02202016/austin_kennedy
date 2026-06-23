@@ -16,7 +16,7 @@ export const POST_GATE_PASSWORD =
 
 // Additional accepted passwords beyond POST_GATE_PASSWORD. Any of these unlocks
 // a gated post. Comparison is case-insensitive (see isValidPostPassword).
-const EXTRA_POST_GATE_PASSWORDS = ["Origami"]
+const EXTRA_POST_GATE_PASSWORDS = ["Origami", "COLETTE"]
 
 export function isValidPostPassword(entered: string): boolean {
   const normalized = entered.trim().toLowerCase()
@@ -29,6 +29,7 @@ export function isValidPostPassword(entered: string): boolean {
 export const PROTECTED_POST_SLUGS = new Set<string>([
   "how-to-do-outbound",
   "how-to-set-up-seo-and-aeo-from-scratch",
+  "how-to-set-up-a-linode-vm",
 ])
 
 export function isProtectedPost(slug: string): boolean {
