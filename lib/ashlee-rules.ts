@@ -1,0 +1,63 @@
+import crypto from "node:crypto"
+import { marked } from "marked"
+import slugify from "slugify"
+
+// "Learnings from Ashlee" — a private, server-gated page.
+//
+// IMPORTANT: this repo is PUBLIC. The content is therefore NOT stored in
+// plaintext anywhere in it. What lives below is an AES-256-GCM ciphertext whose
+// decryption key is the 16-character API key the reader must enter. Without that
+// key the blob is undecryptable, so the text is never exposed by browsing the
+// repo, reading the client bundle, or sniffing the network. It exists only in
+// server memory, transiently, after a correct key is supplied — and is rendered
+// to HTML for that single request. The key itself is never stored in the repo.
+
+export const ASHLEE_GATE_COOKIE = "ashlee_key"
+export const ASHLEE_PATH = "/learnings-from-ashlee"
+export const ASHLEE_TITLE = "Learnings from Ashlee"
+export const ASHLEE_DESCRIPTION = "Private. Enter the 16-character key to read."
+
+// base64( salt(16) || iv(12) || gcmTag(16) || ciphertext )
+const ENCRYPTED_RULES =
+  "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"
+
+/**
+ * Decrypt the rules with the supplied key. Returns the markdown, or null if the
+ * key is wrong or the blob is malformed (the GCM auth-tag check throws, which we
+ * swallow into null). A correct key is the ONLY way to recover the plaintext.
+ */
+export function decryptRules(key: string): string | null {
+  if (!key) return null
+  try {
+    const buf = Buffer.from(ENCRYPTED_RULES, "base64")
+    const salt = buf.subarray(0, 16)
+    const iv = buf.subarray(16, 28)
+    const tag = buf.subarray(28, 44)
+    const ct = buf.subarray(44)
+    const dk = crypto.scryptSync(key, salt, 32)
+    const d = crypto.createDecipheriv("aes-256-gcm", dk, iv)
+    d.setAuthTag(tag)
+    return Buffer.concat([d.update(ct), d.final()]).toString("utf8")
+  } catch {
+    return null
+  }
+}
+
+/** True iff the key correctly decrypts the blob. */
+export function isValidAshleeKey(key: string): boolean {
+  return decryptRules(key) !== null
+}
+
+/**
+ * Render the decrypted markdown to HTML using the same pipeline as the blog
+ * (gfm on, slugified heading ids for in-page anchors).
+ */
+export async function renderRulesHtml(markdown: string): Promise<string> {
+  marked.setOptions({ gfm: true, breaks: false })
+  let html = await marked(markdown.trim())
+  html = html.replace(/<h([1-6])>([^<]+)<\/h[1-6]>/g, (_m, level, text) => {
+    const id = slugify(text.trim(), { lower: true, strict: true })
+    return `<h${level} id="${id}">${text}</h${level}>`
+  })
+  return html
+}
