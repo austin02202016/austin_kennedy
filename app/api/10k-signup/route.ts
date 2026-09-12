@@ -20,7 +20,7 @@ export async function GET() {
       return NextResponse.json({ display: 0, full: false })
     }
     const actual = Number(data ?? 0)
-    return NextResponse.json({ display: actual, full: actual >= EVENT.seats })
+    return NextResponse.json({ display: actual + EVENT.displayOffset, full: actual >= EVENT.seats })
   } catch (e) {
     console.error("10k count failed:", e)
     return NextResponse.json({ display: 0, full: false })

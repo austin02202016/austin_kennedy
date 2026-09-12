@@ -11,6 +11,7 @@ export const EVENT = {
   seats: 260,
   warnAt: 240, // show the "get here early" warning once this many are registered
   doorsBy: "5:30",
+  displayOffset: 50, // "already registered" shows real count + this; capacity math uses the real count
 } as const
 
 export const EVENT_URL = `https://austnkennedy.com/${EVENT.slug}`
