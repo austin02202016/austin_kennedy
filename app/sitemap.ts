@@ -66,6 +66,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.6,
     },
+    {
+      url: `${SITE_URL}/how-to-make-10k-a-month-in-college`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
   ]
 
   const blogPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
