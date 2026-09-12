@@ -4,7 +4,7 @@ import { SignupForm } from "./signup-form"
 import { TiltImage } from "./tilt-image"
 import { EVENT } from "./event"
 
-const DESCRIPTION = `UIUC students who are actually clearing $10K a month walk through exactly how they did it. ${EVENT.dateLabel}, ${EVENT.timeLabel}, ${EVENT.venue}. Free to attend.`
+const DESCRIPTION = `How to make $10K/month in college, from creators and founders who have done it before. ${EVENT.dateLabel}, ${EVENT.timeLabel}, ${EVENT.venue}. Free to attend.`
 
 export const metadata: Metadata = {
   title: `${EVENT.title} — UIUC Event`,
@@ -17,12 +17,21 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     url: `${SITE_URL}/${EVENT.slug}`,
     type: "website",
+    images: [
+      {
+        url: `${SITE_URL}/10k-event.png`,
+        width: 1080,
+        height: 1350,
+        alt: `${EVENT.title} — UIUC Event Flyer`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${EVENT.title} — UIUC Event`,
-    description: "UIUC students clearing $10K a month. One night. Exactly how they did it.",
+    description: "From creators and founders who have done it before. One night at UIUC.",
     creator: "@astnkennedy",
+    images: [`${SITE_URL}/10k-event.png`],
   },
 }
 
