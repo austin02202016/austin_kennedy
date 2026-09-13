@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${SITE_URL}/10k-event.png`,
+        url: `${SITE_URL}/10k-event-2.png`,
         width: 1080,
         height: 1350,
         alt: `${EVENT.title} — UIUC Event Flyer`,
@@ -31,14 +31,14 @@ export const metadata: Metadata = {
     title: `${EVENT.title} — UIUC Event`,
     description: "From creators and founders who have done it before. One night at UIUC.",
     creator: "@astnkennedy",
-    images: [`${SITE_URL}/10k-event.png`],
+    images: [`${SITE_URL}/10k-event-2.png`],
   },
 }
 
 export default function TenKPage() {
   return (
     <div className="min-h-screen bg-neutral-50 relative overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-gradient-to-b from-emerald-100/40 via-lime-50/20 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-gradient-to-b from-sky-100/50 via-blue-50/20 to-transparent rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-5xl mx-auto px-6 md:min-h-screen md:flex md:items-center md:py-0">
         <div className="flex flex-col-reverse md:flex-row md:items-center md:gap-20 w-full">

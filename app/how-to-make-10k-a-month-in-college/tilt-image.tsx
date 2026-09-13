@@ -33,8 +33,8 @@ export function TiltImage() {
       <div className="absolute -inset-[3px] rounded-2xl bg-[conic-gradient(from_var(--border-angle),transparent_30%,rgba(0,0,0,0.15)_50%,transparent_70%)] animate-border-spin" />
       <div className="absolute -inset-[2px] rounded-2xl bg-neutral-50" />
       <Image
-        src="/10k-event.png"
-        alt={`${EVENT.title} — ${EVENT.dateLabel}, ${EVENT.timeLabel} at ${EVENT.venue}. From creators and founders who have done it before: Shrikar Lekkala, Jay Yang, Luna Bitar, Mira Alifantis, Austin Kennedy, and Jason Wang.`}
+        src="/10k-event-2.png"
+        alt={`${EVENT.title} — ${EVENT.dateLabel}, ${EVENT.timeLabel} at ${EVENT.venue}. From creators and founders who have done it before: Shrikar Lekkala, Jay Yang, Luna Bitar, Mira Alifantis, Austin Kennedy, and Monica Alifantis.`}
         width={800}
         height={1000}
         className="relative w-full rounded-xl"
