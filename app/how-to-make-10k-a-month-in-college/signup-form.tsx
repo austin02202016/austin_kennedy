@@ -201,7 +201,7 @@ export function SignupForm() {
             disabled={isPending}
             className="bg-neutral-900 text-white font-medium text-sm rounded-lg py-2.5 px-10 hover:bg-neutral-800 active:scale-[0.99] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm shadow-neutral-900/10"
           >
-            {isPending ? "Submitting..." : "Let's run it"}
+            {isPending ? "Submitting..." : "Reserve my spot"}
           </button>
         </div>
       </form>
