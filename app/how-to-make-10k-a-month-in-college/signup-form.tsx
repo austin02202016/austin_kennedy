@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { findRso } from "./rso-config"
 import { COLLEGES, EVENT, EVENT_URL } from "./event"
+import { trackEventSignup } from "@/lib/sapience"
 
 const ATTENDEE_PICS = [
   "/attendee-1.png",
@@ -47,6 +48,9 @@ export function SignupForm() {
         }),
       })
       const data = await res.json()
+      if (res.ok && data.success) {
+        trackEventSignup(String(form.get("email") ?? ""), EVENT.key)
+      }
       setState(data)
     } catch {
       setState({ error: "Something went wrong. Try again." })
