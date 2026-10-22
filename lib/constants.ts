@@ -1,6 +1,6 @@
 export const SITE_URL = "https://austnkennedy.com"
 export const SITE_NAME = "Austin Kennedy"
-export const SITE_TITLE = "Austin Kennedy — Founder of Sapience"
-export const FOUNDER_ONE_LINER = "Founder of Sapience — helping consumer products generate revenue from ChatGPT, Claude, and Perplexity."
+export const SITE_TITLE = "Austin Kennedy | Founder of Sapience"
+export const FOUNDER_ONE_LINER = "Founder of Sapience. Helping consumer products generate revenue from ChatGPT, Claude, and Perplexity."
 export const SITE_DESCRIPTION = "Austin Kennedy is the founder of Sapience, helping consumer products generate revenue from ChatGPT, Claude, and Perplexity."
 export const COMPANY_URL = "https://trysapience.com"
