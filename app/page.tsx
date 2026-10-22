@@ -122,6 +122,14 @@ export default function HomePage() {
               >
                 {">"} instagram
               </a>
+              <a
+                href="https://www.youtube.com/@Austnkennedy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-base text-zinc-900 hover:text-zinc-500 transition-colors"
+              >
+                {">"} youtube
+              </a>
               <div className="border-t border-zinc-100 my-2" />
 
               <a
