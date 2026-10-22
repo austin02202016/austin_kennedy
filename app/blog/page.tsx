@@ -7,7 +7,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "Blog | Austin Kennedy",
   description:
-    "Thoughts on AI agents, engineering, community building, and navigating your 20s. Written by Austin Kennedy, Founding Engineer at Origami (YC F24).",
+    "Thoughts on AI agents, engineering, community building, and navigating your 20s. Written by Austin Kennedy, founder of Sapience.",
   alternates: {
     canonical: `${SITE_URL}/blog`,
   },

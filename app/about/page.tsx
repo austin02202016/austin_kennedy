@@ -1,19 +1,19 @@
 import type { ReactNode } from "react"
 import type { Metadata } from "next"
 import { InnerLayout } from "@/components/inner-layout"
-import { SITE_URL } from "@/lib/constants"
+import { SITE_URL, SITE_DESCRIPTION, COMPANY_URL } from "@/lib/constants"
 
 export const metadata: Metadata = {
   title: "My Story — Austin Kennedy",
   description:
-    "The full timeline of Austin Kennedy — from Elmwood Park to UIUC to founding engineer at Origami (YC F24) in San Francisco. A self-taught engineer's journey.",
+    SITE_DESCRIPTION,
   alternates: {
     canonical: `${SITE_URL}/about`,
   },
   openGraph: {
     title: "My Story — Austin Kennedy",
     description:
-      "The full timeline from Elmwood Park to UIUC to founding engineer at a YC startup in San Francisco.",
+      SITE_DESCRIPTION,
     url: `${SITE_URL}/about`,
     type: "profile",
   },
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "My Story — Austin Kennedy",
     description:
-      "From Elmwood Park to founding engineer at Origami (YC F24) in San Francisco.",
+      SITE_DESCRIPTION,
     creator: "@astnkennedy",
   },
 }
@@ -30,17 +30,19 @@ export default function AboutPage() {
   return (
     <InnerLayout title="MY STORY">
       <p className="text-zinc-500 text-sm mb-12 leading-relaxed">
-        i&apos;m a 22-year-old founding engineer at a yc startup in san francisco.
-        i moved across the country to build something real with close friends.
-        here&apos;s the full timeline.
+        I&apos;m Austin Kennedy, founder of <InlineLink href={COMPANY_URL}>Sapience</InlineLink> — helping
+        consumer products generate revenue from ChatGPT, Claude, and Perplexity.
+        Previously, I was a founding engineer at Origami (YC F24). Here&apos;s the full timeline.
       </p>
 
       <div className="space-y-8">
         <TimelineItem year="2026">
+          founded <InlineLink href={COMPANY_URL}>Sapience</InlineLink>, helping consumer products
+          generate revenue from ChatGPT, Claude, and Perplexity. earlier in the year,
           season 3 began january 18th. launched origami&apos;s self-serve product and got our{" "}
           <strong>first payment from a stranger</strong> — the hardest dollar.
-          75 users in week one. now focused on content and product in parallel.
-          still hosting events, still building in public. 14 weeks to go.
+          75 users in week one. focused on content and product in parallel,
+          while hosting events and building in public.
         </TimelineItem>
 
         <TimelineItem year="2025">

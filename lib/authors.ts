@@ -1,3 +1,5 @@
+import { FOUNDER_ONE_LINER } from "@/lib/constants"
+
 export interface Author {
   name: string
   avatar: string
@@ -11,8 +13,8 @@ const authors: Record<string, Author> = {
   "Austin Kennedy": {
     name: "Austin Kennedy",
     avatar: "/austin-profile.jpg",
-    title: "Founding Engineer @ Origami (YC F24)",
-    bio: "Founding Engineer at Origami (YC F24). Self-taught engineer, UIUC grad. Building AI agents and MCP in San Francisco.",
+    title: "Founder of Sapience",
+    bio: FOUNDER_ONE_LINER,
     linkedin: "https://www.linkedin.com/in/austnkennedy/",
     twitter: "https://x.com/astnkennedy",
   },

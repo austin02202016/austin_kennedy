@@ -78,14 +78,14 @@ export default function GuidePage() {
             >
               austin kennedy
             </a>{" "}
-            · founding engineer @{" "}
+            · founder of{" "}
             <a
-              href="https://origami.chat"
+              href="https://trysapience.com"
               target="_blank"
               rel="noopener noreferrer"
               className="text-zinc-600 hover:text-zinc-900 underline underline-offset-2"
             >
-              origami (yc f24)
+              Sapience
             </a>
           </p>
 
@@ -116,9 +116,9 @@ export default function GuidePage() {
               businesses. I didn&apos;t know what an API was.
             </P>
             <P>
-              Now I&apos;m a founding engineer at{" "}
+              I became a founding engineer at{" "}
               <ExtLink href="https://origami.chat">Origami (YC F24)</ExtLink>{" "}
-              doing everything from back-end infrastructure to design engineering to
+              working on everything from back-end infrastructure to design engineering to
               AI agent development. I built 6 AI agents that automated my
               entire operations job — went from 40+ hours of manual work to about
               10.
