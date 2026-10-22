@@ -109,6 +109,7 @@ export function PersonSchema() {
       "https://www.linkedin.com/in/austnkennedy/",
       "https://github.com/austin02202016",
       "https://www.instagram.com/austnkennedy/",
+      "https://www.youtube.com/@Austnkennedy",
     ],
     knowsAbout: [
       "Artificial Intelligence",
