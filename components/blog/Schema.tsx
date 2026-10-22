@@ -1,5 +1,5 @@
 import { generateBlogPostSchema, type BlogPost } from "@/lib/blog"
-import { SITE_URL } from "@/lib/constants"
+import { SITE_URL, SITE_DESCRIPTION, COMPANY_URL } from "@/lib/constants"
 
 interface GenericSchemaProps {
   json: Record<string, unknown>
@@ -93,11 +93,12 @@ export function PersonSchema() {
     name: "Austin Kennedy",
     url: SITE_URL,
     image: `${SITE_URL}/austin-profile.jpg`,
-    jobTitle: "Founding Engineer",
+    jobTitle: "Founder",
     worksFor: {
       "@type": "Organization",
-      name: "Origami",
-      url: "https://origami.chat",
+      name: "Sapience",
+      url: COMPANY_URL,
+      founder: { "@id": `${SITE_URL}/#person` },
     },
     alumniOf: {
       "@type": "CollegeOrUniversity",
@@ -107,17 +108,21 @@ export function PersonSchema() {
       "https://x.com/astnkennedy",
       "https://www.linkedin.com/in/austnkennedy/",
       "https://github.com/austin02202016",
+      "https://www.instagram.com/austnkennedy/",
     ],
     knowsAbout: [
       "Artificial Intelligence",
       "AI Agents",
       "Model Context Protocol",
       "Software Engineering",
-      "Y Combinator",
-      "Startup Engineering",
+      "Answer Engine Optimization",
+      "Consumer Products",
+      "ChatGPT",
+      "Claude",
+      "Perplexity",
     ],
     description:
-      "Founding Engineer at Origami (YC F24). Self-taught engineer, UIUC grad. Building AI agents in San Francisco.",
+      SITE_DESCRIPTION,
   }
 
   return (
@@ -139,7 +144,7 @@ export function WebSiteSchema() {
     url: SITE_URL,
     name: "Austin Kennedy",
     description:
-      "Personal website of Austin Kennedy — Founding Engineer at Origami (YC F24), self-taught engineer, and community builder in San Francisco.",
+      SITE_DESCRIPTION,
     publisher: {
       "@type": "Person",
       "@id": `${SITE_URL}/#person`,

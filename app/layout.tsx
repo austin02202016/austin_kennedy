@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { PersonSchema, WebSiteSchema } from "@/components/blog/Schema";
-import { SITE_URL } from "@/lib/constants";
+import { SITE_URL, SITE_TITLE, SITE_DESCRIPTION } from "@/lib/constants";
 import { SapienceTracker } from "@/components/sapience-tracker";
 import "./globals.css";
 
@@ -18,17 +18,20 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Austin Kennedy — Founding Engineer at Origami (YC F24)",
+    default: SITE_TITLE,
     template: "%s | Austin Kennedy",
   },
   description:
-    "Personal website of Austin Kennedy — Founding Engineer at Origami (YC F24). Self-taught engineer, UIUC grad, community builder in San Francisco.",
+    SITE_DESCRIPTION,
   keywords: [
     "Austin Kennedy",
-    "Origami",
-    "YC F24",
-    "AI Agents",
-    "Founding Engineer",
+    "Sapience",
+    "Founder",
+    "Entrepreneur",
+    "AI Search",
+    "ChatGPT",
+    "Claude",
+    "Perplexity",
     "San Francisco",
     "UIUC",
     "Software Engineer",
@@ -42,16 +45,16 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: "Austin Kennedy",
-    title: "Austin Kennedy — Founding Engineer at Origami (YC F24)",
+    title: SITE_TITLE,
     description:
-      "Personal website of Austin Kennedy — Founding Engineer at Origami (YC F24). Self-taught engineer, UIUC grad, community builder in San Francisco.",
+      SITE_DESCRIPTION,
   },
   twitter: {
     card: "summary",
     creator: "@astnkennedy",
-    title: "Austin Kennedy — Founding Engineer at Origami (YC F24)",
+    title: SITE_TITLE,
     description:
-      "Founding Engineer at Origami (YC F24). Self-taught engineer, UIUC grad. Building in SF.",
+      SITE_DESCRIPTION,
   },
   alternates: {
     canonical: SITE_URL,

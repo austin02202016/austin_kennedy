@@ -1,40 +1,20 @@
 import Image from "next/image"
 import Link from "next/link"
 import type { Metadata } from "next"
-import { FAQSchema } from "@/components/blog/Schema"
-import { SITE_URL } from "@/lib/constants"
+import { SITE_URL, SITE_TITLE, SITE_DESCRIPTION, COMPANY_URL } from "@/lib/constants"
 
 export const metadata: Metadata = {
-  title: "Austin Kennedy — Founding Engineer at Origami (YC F24)",
+  title: { absolute: SITE_TITLE },
   description:
-    "Personal website of Austin Kennedy. Founding Engineer at Origami (YC F24). Self-taught engineer, UIUC grad, community builder in San Francisco.",
+    SITE_DESCRIPTION,
   alternates: {
     canonical: SITE_URL,
   },
 }
 
-const faqData = [
-  {
-    question: "Who is Austin Kennedy?",
-    answer:
-      "Austin Kennedy is a Founding Engineer at Origami (YC F24), a YC-backed AI startup in San Francisco. He is a self-taught software engineer who graduated from the University of Illinois Urbana-Champaign (UIUC) with a Finance degree from Gies College of Business.",
-  },
-  {
-    question: "What is Origami?",
-    answer:
-      "Origami is a Y Combinator (Fall 2024) backed startup building AI-powered prospecting and go-to-market automation tools. Austin Kennedy serves as a Founding Engineer, building AI agents and MCP (Model Context Protocol) servers.",
-  },
-  {
-    question: "What does Austin Kennedy build?",
-    answer:
-      "Austin builds AI agents, MCP servers, and automation tools at Origami. Notable projects include The Nest (an open-source MCP server) and internal AI tools that cut operations time from 20 hours/week to 20 minutes/day.",
-  },
-]
-
 export default function HomePage() {
   return (
     <>
-      <FAQSchema questions={faqData} />
       <div className="min-h-screen bg-white flex items-center justify-center px-6">
         <div className="w-full max-w-[640px] text-center">
           {/* Profile Header */}
@@ -50,18 +30,18 @@ export default function HomePage() {
               Austin Kennedy
             </h1>
             <p className="text-sm text-zinc-500 font-mono mt-1.5 leading-snug">
-              founding engineer,{" "}
+              Founder of{" "}
               <a
-                href="https://origami.chat"
+                href={COMPANY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-500 hover:underline"
               >
-                origami (yc f24)
+                Sapience
               </a>
             </p>
             <p className="text-sm text-zinc-500 font-mono italic mt-0.5 leading-snug">
-              self-taught eng. uiuc grad. building in sf.
+              helping consumer products generate revenue from ChatGPT, Claude, and Perplexity.
             </p>
           </div>
 
