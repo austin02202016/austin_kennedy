@@ -30,7 +30,7 @@ export default function AboutPage() {
   return (
     <InnerLayout title="MY STORY">
       <p className="text-zinc-500 text-sm mb-12 leading-relaxed">
-        I&apos;m Austin Kennedy, founder of <InlineLink href={COMPANY_URL}>Sapience</InlineLink> — helping
+        I&apos;m Austin Kennedy, founder of <InlineLink href={COMPANY_URL}>Sapience</InlineLink>. I help
         consumer products generate revenue from ChatGPT, Claude, and Perplexity.
         Previously, I was a founding engineer at Origami (YC F24). Here&apos;s the full timeline.
       </p>
