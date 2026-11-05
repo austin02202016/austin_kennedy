@@ -1,7 +1,9 @@
 import type { ReactNode } from "react"
 import type { Metadata } from "next"
+import Image from "next/image"
 import { InnerLayout } from "@/components/inner-layout"
-import { SITE_URL, SITE_DESCRIPTION, COMPANY_URL } from "@/lib/constants"
+import { Schema } from "@/components/blog/Schema"
+import { SITE_URL, SITE_DESCRIPTION, COMPANY_URL, HEADSHOT_URL, HEADSHOT_PATH, HEADSHOT_ALT } from "@/lib/constants"
 
 export const metadata: Metadata = {
   title: "My Story — Austin Kennedy",
@@ -16,6 +18,7 @@ export const metadata: Metadata = {
       SITE_DESCRIPTION,
     url: `${SITE_URL}/about`,
     type: "profile",
+    images: [{ url: HEADSHOT_URL, width: 534, height: 534, alt: HEADSHOT_ALT }],
   },
   twitter: {
     card: "summary",
@@ -23,12 +26,44 @@ export const metadata: Metadata = {
     description:
       SITE_DESCRIPTION,
     creator: "@astnkennedy",
+    images: [HEADSHOT_URL],
   },
 }
 
 export default function AboutPage() {
   return (
     <InnerLayout title="MY STORY">
+      <Schema json={{
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "ProfilePage",
+            "@id": `${SITE_URL}/about/#profilepage`,
+            url: `${SITE_URL}/about`,
+            mainEntity: { "@id": `${SITE_URL}/#person` },
+            primaryImageOfPage: { "@id": `${SITE_URL}/about/#headshot` },
+          },
+          {
+            "@type": "ImageObject",
+            "@id": `${SITE_URL}/about/#headshot`,
+            contentUrl: HEADSHOT_URL,
+            name: HEADSHOT_ALT,
+            caption: HEADSHOT_ALT,
+            width: 534,
+            height: 534,
+            representativeOfPage: true,
+            about: { "@id": `${SITE_URL}/#person` },
+          },
+        ],
+      }} />
+      <Image
+        src={HEADSHOT_PATH}
+        alt={HEADSHOT_ALT}
+        width={534}
+        height={534}
+        priority
+        className="w-32 h-32 rounded-full object-cover mb-8"
+      />
       <p className="text-zinc-500 text-sm mb-12 leading-relaxed">
         I&apos;m Austin Kennedy, founder of <InlineLink href={COMPANY_URL}>Sapience</InlineLink>. I help
         consumer products generate revenue from ChatGPT, Claude, and Perplexity.

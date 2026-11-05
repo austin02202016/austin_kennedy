@@ -1,5 +1,5 @@
 import { generateBlogPostSchema, type BlogPost } from "@/lib/blog"
-import { SITE_URL, SITE_DESCRIPTION, COMPANY_URL } from "@/lib/constants"
+import { SITE_URL, SITE_DESCRIPTION, COMPANY_URL, HEADSHOT_URL } from "@/lib/constants"
 
 interface GenericSchemaProps {
   json: Record<string, unknown>
@@ -92,8 +92,8 @@ export function PersonSchema() {
     "@id": `${SITE_URL}/#person`,
     name: "Austin Kennedy",
     url: SITE_URL,
-    image: `${SITE_URL}/austin-profile.jpg`,
-    jobTitle: "Founder",
+    image: HEADSHOT_URL,
+    jobTitle: "Founder of Sapience",
     worksFor: {
       "@type": "Organization",
       name: "Sapience",

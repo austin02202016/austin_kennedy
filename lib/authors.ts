@@ -1,4 +1,4 @@
-import { FOUNDER_ONE_LINER } from "@/lib/constants"
+import { FOUNDER_ONE_LINER, HEADSHOT_PATH } from "@/lib/constants"
 
 export interface Author {
   name: string
@@ -12,7 +12,7 @@ export interface Author {
 const authors: Record<string, Author> = {
   "Austin Kennedy": {
     name: "Austin Kennedy",
-    avatar: "/austin-profile.jpg",
+    avatar: HEADSHOT_PATH,
     title: "Founder of Sapience",
     bio: FOUNDER_ONE_LINER,
     linkedin: "https://www.linkedin.com/in/austnkennedy/",

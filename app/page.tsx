@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import type { Metadata } from "next"
-import { SITE_URL, SITE_TITLE, SITE_DESCRIPTION, COMPANY_URL } from "@/lib/constants"
+import { SITE_URL, SITE_TITLE, SITE_DESCRIPTION, COMPANY_URL, HEADSHOT_PATH, HEADSHOT_ALT } from "@/lib/constants"
 
 export const metadata: Metadata = {
   title: { absolute: SITE_TITLE },
@@ -20,8 +20,8 @@ export default function HomePage() {
           {/* Profile Header */}
           <div className="flex flex-col items-center">
             <Image
-              src="/austin-profile.jpg"
-              alt="Austin Kennedy"
+              src={HEADSHOT_PATH}
+              alt={HEADSHOT_ALT}
               width={72}
               height={72}
               className="rounded-full object-cover w-[72px] h-[72px]"

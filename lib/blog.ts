@@ -4,6 +4,7 @@ import { marked } from "marked"
 import slugify from "slugify"
 import { getAuthor, type Author } from "./authors"
 import { isProtectedPost } from "./protected-posts"
+import { HEADSHOT_URL } from "./constants"
 
 export interface BlogPost {
   slug: string
@@ -212,11 +213,13 @@ export function generateBlogPostSchema(post: BlogPost, siteUrl: string) {
     name: post.title,
     description: post.description,
     url: `${siteUrl}/blog/${post.slug}`,
-    image: post.image ? `${siteUrl}${post.image}` : `${siteUrl}/austin-profile.jpg`,
+    image: post.image ? `${siteUrl}${post.image}` : HEADSHOT_URL,
     author: {
       "@type": "Person",
+      "@id": `${siteUrl}/#person`,
       name: post.author.name,
-      url: post.author.linkedin,
+      url: siteUrl,
+      image: HEADSHOT_URL,
       jobTitle: post.author.title,
     },
     publisher: {
