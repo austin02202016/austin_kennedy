@@ -2,7 +2,7 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { getBlogPost, getAllBlogPosts } from "@/lib/blog"
 import { BlogArticle } from "@/components/blog/blog-article"
-import { SITE_URL } from "@/lib/constants"
+import { SITE_URL, HEADSHOT_URL } from "@/lib/constants"
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>
@@ -41,7 +41,7 @@ export async function generateMetadata({
         ? [post.seo.ogImage]
         : post.image
           ? [post.image]
-          : undefined,
+          : [HEADSHOT_URL],
       type: "article",
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt || post.publishedAt,
@@ -57,7 +57,7 @@ export async function generateMetadata({
         ? [post.seo.ogImage]
         : post.image
           ? [post.image]
-          : undefined,
+          : [HEADSHOT_URL],
     },
   }
 }

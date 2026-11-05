@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { PersonSchema, WebSiteSchema } from "@/components/blog/Schema";
-import { SITE_URL, SITE_TITLE, SITE_DESCRIPTION } from "@/lib/constants";
+import { SITE_URL, SITE_TITLE, SITE_DESCRIPTION, HEADSHOT_URL, HEADSHOT_ALT } from "@/lib/constants";
 import { SapienceTracker } from "@/components/sapience-tracker";
 import "./globals.css";
 
@@ -48,6 +48,7 @@ export const metadata: Metadata = {
     title: SITE_TITLE,
     description:
       SITE_DESCRIPTION,
+    images: [{ url: HEADSHOT_URL, width: 534, height: 534, alt: HEADSHOT_ALT }],
   },
   twitter: {
     card: "summary",
@@ -55,6 +56,7 @@ export const metadata: Metadata = {
     title: SITE_TITLE,
     description:
       SITE_DESCRIPTION,
+    images: [HEADSHOT_URL],
   },
   alternates: {
     canonical: SITE_URL,

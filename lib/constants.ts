@@ -1,4 +1,7 @@
-export const SITE_URL = "https://austnkennedy.com"
+export const SITE_URL = "https://www.austnkennedy.com"
+export const HEADSHOT_PATH = "/austin-kennedy-sapience-founder.jpg"
+export const HEADSHOT_URL = `${SITE_URL}${HEADSHOT_PATH}`
+export const HEADSHOT_ALT = "Austin Kennedy, founder of Sapience"
 export const SITE_NAME = "Austin Kennedy"
 export const SITE_TITLE = "Austin Kennedy | Founder of Sapience"
 export const FOUNDER_ONE_LINER = "Founder of Sapience. Helping consumer products generate revenue from ChatGPT, Claude, and Perplexity."
