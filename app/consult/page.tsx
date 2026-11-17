@@ -14,9 +14,11 @@ export const metadata: Metadata = {
     description:
       "Book a 30-minute or 1-hour consulting call to go deep on AI agents, growth engineering, content, or startups.",
     url: `${SITE_URL}/consult`,
+    images: [{ url: `${SITE_URL}/consulting-preview.png`, width: 1536, height: 1024, alt: "Austin Kennedy — 1:1 Consulting" }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
+    images: [`${SITE_URL}/consulting-preview.png`],
     title: "Consulting — Austin Kennedy",
     creator: "@astnkennedy",
   },
@@ -28,6 +30,7 @@ const sessions = [
   {
     name: "30 Minute Consulting",
     duration: "30 min",
+    price: "$300",
     blurb: "a focused session to work through one specific problem or question.",
     // Confirmed live event slug
     url: `${CALENDLY_BASE}/30min`,
@@ -35,6 +38,7 @@ const sessions = [
   {
     name: "1 Hour Consulting",
     duration: "60 min",
+    price: "$500",
     blurb: "a deep dive — strategy, a full review, or working through something end to end.",
     url: `${CALENDLY_BASE}/30-minute-meeting-clone`,
   },
@@ -63,7 +67,7 @@ export default function ConsultPage() {
                 <p className="text-sm text-zinc-500 mt-1 leading-relaxed">{s.blurb}</p>
               </div>
               <span className="shrink-0 text-xs font-medium text-zinc-400 border border-zinc-200 rounded-full px-3 py-1">
-                {s.duration}
+                {s.duration} · {s.price} USD
               </span>
             </div>
             <span className="inline-block mt-4 text-sm text-zinc-900">{">"} book this call</span>
