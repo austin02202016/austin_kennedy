@@ -8,7 +8,6 @@ export function getSupabaseAdmin() {
   if (_client) return _client
 
   const key = process.env.FRESHMAN_SUPABASE_SERVICE_KEY 
-    || process.env.NEXT_PUBLIC_FRESHMAN_SUPABASE_SERVICE_KEY
 
   if (!key) {
     throw new Error("Missing FRESHMAN_SUPABASE_SERVICE_KEY env var")
